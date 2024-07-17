@@ -16,7 +16,9 @@
  *    + 基于alert/confirm/prompt/document.write...这些方法输出内容，都是把内容先转换为字符串，然后再输出的
  */
 
-// null 和 undefined报错:
+/**
+ * null 和 undefined报错:
+ */
 // null 和 undefined是进制直接toString的
 (null).toString(); //报错
 (undefined).toString(); //报错
