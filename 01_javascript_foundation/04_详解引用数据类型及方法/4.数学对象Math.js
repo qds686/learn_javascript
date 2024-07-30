@@ -30,7 +30,7 @@ console.log(Math.pow(2, 3)); // 8
 
 // PI=3.14...
 console.log(Math.PI); // 3.141592653589793
-
+ 
 // random 随机小数(0,1)不包含1
 // 获取 n 到 m 之间的随机数：(n,m)
 // Math.random() * (m - n) + n;
