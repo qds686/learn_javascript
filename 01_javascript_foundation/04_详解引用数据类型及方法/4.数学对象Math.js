@@ -39,7 +39,7 @@ console.log(Math.PI); // 3.141592653589793
 Math.floor(Math.random() * 100 + 1); // 1-101
 console.log(Math.random() * 99 + 1); // 1-100
 
-// => 时间对象Date
+
 
 
 
