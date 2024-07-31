@@ -102,17 +102,17 @@ console.log(res4); // 1
     情况一: 搜索到, 搜索字符串所在索引位置
     情况二: 没有搜索到, 返回-1
 */
-var index = message.indexOf(name)
-if (message.indexOf(name) !== -1) {
-  console.log("message中包含name")
-} else {
-  console.log("message不包含name")
-}
+// var index = message.indexOf(name); 
+// if (message.indexOf(name) !== -1) {
+//   console.log("message中包含name")
+// } else {
+//   console.log("message不包含name")
+// }
 
 // 2.includes: ES6中新增一个方法, 就是用来判断包含关系
-if (message.includes(name)) {
-  console.log("message中包含name")
-}
+// if (message.includes(name)) {
+//   console.log("message中包含name")
+// }
 
 // 5.slice 
 /**
@@ -120,7 +120,7 @@ if (message.includes(name)) {
  * 参数：[n,m)
  * 返回值：查找的字符
  *   + [n,m)
- *   + [n, m不写查找的犯罪后]
+ *   + [n, m不写查找到结尾]
  *   + n不写或者写一个0，就是复制一份
  *   + 参数可以为负值，转换成整数的规律：str.length + 负的索引值
  */
@@ -129,14 +129,15 @@ var str = "yangfanqihang"
 str.slice(1, 3) // "an"
 str.slice(0) // 复制一份
 str.slice() // 复制一份 
-var res = str.slice(-3, -1);   ===> "an"
+var res = str.slice(-3, -1);
+console.log(res, str.length); // "an"
 
 // 6.substring 
 /**
  * 作用：从indexStart提取字符,直到（但不包括）indexEnd
- *   + 如果省略了 indexEnd，则 substring() 提取字符直到字符串的末尾
- *   + 如果 indexStart 等于 indexEnd，则 substring() 返回一个空字符串
- *   + 如果 indexStart 大于 indexEnd，则 substring() 的效果就像交换了这两个参数一样
+ *   + [indexStart, 不写就提取到结尾]
+ *   + 如果 indexStart = indexEnd，则 substring() 返回一个空字符串
+ *   + 如果 indexStart > indexEnd，则 substring() 的效果就像交换了这两个参数一样
  * 参数：(indexStart, indexEnd)
  *   + indexStart:返回子字符串中第一个要包含的字符的索引
  *   + indexEnd:返回子字符串中第一个要排除的字符的索引
@@ -148,23 +149,27 @@ var res = str.slice(-3, -1);   ===> "an"
  */
 
 // 6.1 基本用法
-const anyString = "Mozilla";
+var anyString = "Mozilla";
 
+// 提取[m,n)
 console.log(anyString.substring(0, 1)); // 'M'
-console.log(anyString.substring(1, 0)); // 'M'
-
 console.log(anyString.substring(0, 6)); // 'Mozill'
 
-console.log(anyString.substring(4)); // 'lla'
-console.log(anyString.substring(4, 7)); // 'lla'
+// 开始大于结束，相当于参数交换
+console.log(anyString.substring(1, 0)); // 'M'
 console.log(anyString.substring(7, 4)); // 'lla'
 
+// 如果结束不写，提取到字符串结尾
+console.log(anyString.substring(4)); // 'lla'
+
+// 如果结束的长度大于字符串的长度，默认提取到 str.length
+console.log(anyString.substring(4, 7)); // 'lla'
 console.log(anyString.substring(0, 7)); // 'Mozilla'
 console.log(anyString.substring(0, 10)); // 'Mozilla'
 
 // 6.2 调用 substring() 时使用 length 属性
 // 使用 substring() 方法和 length 属性来提取特定字符串的最后字符。这种方法可能更容易记住，因为你不需要像上面的示例那样知道起始和结束索引
-const text = "Mozilla";
+var text = "Mozilla";
 
 // 获取字符串的最后 4 个字符
 console.log(text.substring(text.length - 4)); // 打印“illa”
@@ -178,9 +183,9 @@ substring() 和 substr() 方法之间存在细微差别，因此你应该小心�
   + substr() 方法的两个参数是 start 和 length，而 substring() 方法的参数是 start 和 end。
   + 如果 substr() 的 start 索引为负数，它将循环到字符串的末尾，而 substring() 会将其限制为 0。
   + 在 substr() 中，如果长度为负数，将被视为零；而在 substring() 中，如果 end 小于 start ，则会交换这两个索引。
-此外，substr() 被认为是 ECMAScript 中的遗留特性，因此如果可能的话最好避免使用它。
+此外，substr() 被认为是 ECMAScript 中的遗留特性，因此如果可能的话最好避免使用它，substr已被弃用
 */
-const text = "Mozilla";
+var text = "Mozilla";
 console.log(text.substring(2, 5)); // "zil"
 console.log(text.substr(2, 3)); // "zil"
 
@@ -189,7 +194,7 @@ console.log(text.substr(2, 3)); // "zil"
 // substring() 和 slice() 方法几乎相同，但在处理负数参数时有一些细微差别。
 
 // substring() 方法在 indexStart 大于 indexEnd 的情况下会交换它的两个参数，这意味着仍会返回一个字符串。而 slice() 方法在这种情况下返回一个空字符串。
-const text = "Mozilla";
+var text = "Mozilla";
 console.log(text.substring(5, 2)); // "zil"
 console.log(text.slice(5, 2)); // ""
 
@@ -203,6 +208,7 @@ console.log(text.slice(-5, -2)); // "zil"
 
 // 6.5 替换字符串中的子字符串
 // 替换字符串中的子字符串。它可以替换单个字符和子字符串。示例的最后一个函数调用将字符串 Brave New World 更改为 Brave New Web。
+
 // 将字符串 fullS 中的 oldS 替换为 newS
 function replaceString(oldS, newS, fullS) {
   for (let i = 0; i < fullS.length; ++i) {
@@ -216,7 +222,7 @@ function replaceString(oldS, newS, fullS) {
   return fullS;
 }
 
-replaceString("World", "Web", "Brave New World");
+// replaceString("World", "Web", "Brave New World");
 
 // 请注意，如果 oldS 本身是 newS 的子字符串，这可能导致无限循环，例如，假如你尝试在此处用 "OtherWorld" 替换 "World"。
 
@@ -224,6 +230,7 @@ replaceString("World", "Web", "Brave New World");
 function replaceString(oldS, newS, fullS) {
   return fullS.split(oldS).join(newS);
 }
+replaceString("World", "Web", "Brave New World");
 
 // 上面的代码仅作为子字符串操作的示例。如果你需要替换子字符串，大多数情况下你会想要使用 String.prototype.replace() 函数。
 
@@ -237,10 +244,10 @@ function replaceString(oldS, newS, fullS) {
 */
 var message = 'my name is hezi';
 var newMessage = message.replace("hezi", "kobe")
-console.log(message);
-console.log(newMessage);
+console.log(message); // 'my name is hezi'
+console.log(newMessage); // 'my name is kobe;
 
-var newMessage = message.replace("hezi", function() {
+var newMessage = message.replace("hezi", function () {
   return newName.toUpperCase()
 })
 console.log(newMessage)
@@ -248,13 +255,13 @@ console.log(newMessage)
 // 9.split
 /* 
   ● 作用：按照指定的字符把字符串分割成数组
-  ● 参数：分割符
+  ● 参数：分割符, 分割的次数
   ● 返回值：分割后的数组
 */
-var str="1-2-3";
+var str = "1-2-3";
 var res = str.split("-");
 
-console.log(res); //===>  ["1", "2", "3"]
+console.log(res); // ["1", "2", "3"]
 
 // 10.字符串拼接concat()和trim()
 var str1 = "Hello"
@@ -272,5 +279,10 @@ var newString3 = str1.concat(str2, str3, "abc", "cba")
 console.log(newString2)
 console.log(newString3)
 
-//删除收尾的空格
+//删除首位的空格
 console.log("    why      abc   ".trim()) //why      abc
+
+// 11. toString 和 valueOf
+// valueOf 返回一个字符串，表示给定 String 对象的原始值
+// String 对象重写了 Object 的 toString 方法，它不会继承 Object.prototype.toString()
+// toString 方法返回字符串本身（如果它是原始值）或 String 对象封装的字符串。它的实现与 String.prototype.valueOf() 完全相同。
