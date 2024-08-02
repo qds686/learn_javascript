@@ -86,6 +86,7 @@ console.log(res1); // 2
 var res2 = str.lastIndexOf('i');
 console.log(res2); // 9
 
+
 // 4.2 两个参数：开始找的位置(indexOf) / 找到哪终止(lastIndexOf)
 // 从下标3开始查找
 var res3 = str.indexOf('i', 3);
