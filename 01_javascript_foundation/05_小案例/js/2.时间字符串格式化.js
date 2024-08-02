@@ -55,7 +55,7 @@ function timeFormat(str) {
 var time = timeFormat(time);
 // console.log(time); // '2024年08月02日 09时55分12秒'
 
-// 方式三：正则
+// 思路3：正则
 var time = "2024-8-2 9:55:12".split(/(?:\s|-|:)/);
 var res = `${time[0]}年${addZero(time[1])}月${addZero(time[2])}日 ${addZero(time[3])}时${addZero(time[4])}分${addZero(time[5])}秒`
 // console.log(res); // '2024年08月02日 09时55分12秒'
@@ -66,3 +66,37 @@ var time = "2024-8-2 9:55:12",
   [year, month, day, hours, minutes, seconds] = resArr,
   res = `${year}年${addZero(month)}月${addZero(day)}日 ${addZero(hours)}时${addZero(minutes)}分${addZero(seconds)}秒`;
 // console.log(res); // '2024年08月02日 09时55分12秒'
+
+// 思路4：利用标准日期对象中提供的方法，获取“年月日”等信息
+time = new Date(time);
+var year = time.getFullYear(),
+  month = time.getMonth() + 1,
+  day = time.getDate(),
+  hours = time.getHours(),
+  minutes = time.getMinutes(),
+  seconds = time.getSeconds();
+res = `${year}年${addZero(month)}月${addZero(day)}日 ${addZero(hours)}时${addZero(minutes)}分${addZero(seconds)}秒`;
+// console.log(res); // '2024年08月02日 09时55分12秒'
+
+// 思路5：JS中关于字符串的处理，往往最强大的方案“正则”
+String.prototype.formatTime = function formatTime(template = '{0}年{1}月{2}日 {3}时{4}分{5}秒') {
+  // this => time字符串
+  var arr = this.match(/\d+/g); // ['2024', '8', '2', '9', '55', '12']
+  return template.replace(/\{(\d+)\}/g, function (_, index) {
+    var item = arr[index] || "00";
+    item.length < 2 ? item = `0${item}` : null;
+
+    return item;
+  });
+
+}
+var time = "2024-8-2 9:55:12";
+time = time.formatTime();
+console.log(time); // '2024年08月02日 09时55分12秒'
+
+time = time.formatTime('{0}/{1}/{2}');
+console.log(time); // '2024/08/02'
+
+time = time.formatTime('{1}-{2} {3}:{4}');
+console.log(time); // '08-02 00:00'
+
