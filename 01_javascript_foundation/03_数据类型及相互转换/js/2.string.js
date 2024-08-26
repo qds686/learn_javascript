@@ -10,7 +10,7 @@
  * + 数组转换为字符串，是把数组中的每一项用逗号分隔
  * + 普通对象.toString()的结果是 "[object Object]"
  * "对象转字符串规则"：
- *    + String(对象)：按照 先找Symbol.toPrimitive -> 再看valueOf -> 最后toString来处理
+ *    + String(对象)：严格按照 先找Symbol.toPrimitive -> 再看valueOf -> 最后toString来处理
  *    + 对象.toString()：直接转换为字符串
  *    + 特殊：Object.prototype.toString是用来检测数据类型的
  *    + 基于alert/confirm/prompt/document.write...这些方法输出内容，都是把内容先转换为字符串，然后再输出的

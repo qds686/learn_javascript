@@ -10,7 +10,7 @@ typeof value
       ⅰ. 000 对象、1 整数、010 浮点数、100 字符串、110 布尔、000000… null、-2^30 undefined
     b. typeof 检测数据类型就是根据它的“二进制值”检测的
   4. 局限性的原理
-    a. typeof null 是 object 的原因是 null 在计算机中存储的二进制值是 64 个 0，以 000 开头的会认为是对象，所以，结果是“object”
+    a. typeof null 是 object 的原因是 null 在计算机中存储的二进制值是 64 个 0，以 000 开头的会认为是对象，然后再去看有没有实现call方法，如果实现了，返回'function',没有则返回“object”
     b. 所有的对象都是以“000 开头”，所以检测结果都是“object”，不能细分对象
   5. typeof 未被声明的变量 -> “undefined”
 */
@@ -68,53 +68,60 @@ if (typeof Symbol !== "undefined") {
   let sym = Symbol();
 }
 
+(function () {
+  let utils = {};
 
+  // 浏览器端不支持modules,有window
+  if (typeof window !== "undefined") window.utils = utils;
+  // CommonJS模块规范导出
+  if (typeof modules === "object" && typeof module.exports === "object") module.exports = utils;
+});
 // =============
 // 封装typeof
-function myTypeof (val){
+function myTypeof(val) {
   var type = typeof val,
-      toStr = Object.prototype.toString,
-      temp = {
-        '[object Object]': object,
-        '[object Array]': object Array,
-        '[object Number]': number,
-        '[object String]': string,
-        '[object Boolean]': boolean,
-        '[object Undefined]': undefined
-      };
-  if(val === null){
+    toStr = Object.prototype.toString,
+    temp = {
+      '[object Object]': object,
+      '[object Array]': array,
+      '[object Number]': number,
+      '[object String]': string,
+      '[object Boolean]': boolean,
+      '[object Undefined]': undefined
+    };
+  if (val === null) {
     return 'null';
-  }else {
-    if(type === "object"){
+  } else {
+    if (type === "object") {
       var ret = toStr.call(val);
       return temp[ret];
-    }else {
+    } else {
       return type;
     }
   }
 }
 
 // JQuery封装
-(function(){
+(function () {
   var class2Type = {};
   var toString = class2Type.toString; // Object.prototype.toString
-  
+
   // 设定数据类型的映射表
-  ["Boolean", "Number", "String", "Function", "Array", "Date", "RegExp", "Object", "Error", "Symbol"].forEach(name =>{
+  ["Boolean", "Number", "String", "Function", "Array", "Date", "RegExp", "Object", "Error", "Symbol"].forEach(name => {
     class2Type[`[object ${name}]`] = name.toLowerCase();
   });
-  
-  function toType(obj){
-    if(obj == null){
-       // 传递的值是null或者undefined，就返回对应的字符串
+
+  function toType(obj) {
+    if (obj == null) {
+      // 传递的值是null或者undefined，就返回对应的字符串
       return obj + "";
     }
     // 基本数据类型都来用typeof检测
     return typeof obj === "object" || typeof obj === "function" ?
-      class2Type[toString.call(obj)] || "object" : 
+      class2Type[toString.call(obj)] || "object" :
       typeof obj;
   }
-  
+
   window.toType = toType;
 })();
 toType(null) => "null"
