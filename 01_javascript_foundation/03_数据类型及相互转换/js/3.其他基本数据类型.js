@@ -39,18 +39,30 @@ if (10) {
  *   + 它会去当前对象所有的属性上「含：私有属性和原型链上的公有属性」进行查找
  *   + 只会迭代可枚举的属性「不论属性是公有还是私有」
  *   + 迭代不了Symbol类型的属性
+ *   + 迭代顺序以数字属性优先
  */
 let key = Symbol('BB');
 let obj1 = {
   name: "hezi",
   age: 18,
   [Symbol('AA')]: 'aaa',
-  [key]:'bbb'
+  [key]: 'bbb'
 }
 // console.log(obj1); // {name: 'hezi', age: 18, Symbol(AA): 'aaa'}
 // console.log(obj1[Symbol('AA')]); // 这样操作是创建一个唯一值，两次的值不同，所以结果是 undefined
 // console.log(obj1[key]); // 想要获取到同一个引用值，所以需要在对象外部定义一个变量，即可获取到Symbol的属性值 -> 'bbb'
 
+for (let key in obj1) {
+  //解决问题一：遍历不到公有中可枚举的「但是无法改善性能差的问题」
+  if (!obj1.hasOwnProperty(key)) break;
+  // console.log(key); // name age
+}
+
+// symbol属性不能被模板字符串转换为字符串，类型是Symbol类型
+obj1.forEach(key => {
+  // console.log("属性名：", typeof key);
+  // console.log("属性值：", obj[key]);
+});
 /**
  * 3.获取所有的私有属性
  *   + Object.keys(obj)：获取当前对象 私有的、可枚举的、非Symbol类型的 属性「以数组存储」

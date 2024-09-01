@@ -104,7 +104,7 @@ isNaN(Number(!!Number(parseInt("0.8")))) // false
 // !"..." -> false
 // !false -> true
 
-isNaN(parseInt(new Date())) + Number([1]) + typeof undefined; 
+isNaN(parseInt(new Date())) + Number([1]) + typeof undefined;
 // isNaN(parseInt(new Date()))
 //  + isNaN(NaN) -> true
 // Number([1])
@@ -113,7 +113,7 @@ isNaN(parseInt(new Date())) + Number([1]) + typeof undefined;
 // typeof undefined -> 'undefined'
 // -> true + 1 + 'undefined' -> '2undefined'
 
-!!Number("") + !isNaN(Number(null)) + !!"parseInt([])" + typeof !null; 
+!!Number("") + !isNaN(Number(null)) + !!"parseInt([])" + typeof !null;
 /*
   !!Number("")
     + !!0 -> false
@@ -126,10 +126,10 @@ isNaN(parseInt(new Date())) + Number([1]) + typeof undefined;
   -> false + true + true + 'boolean' -> '2boolean'
 */
 
-!typeof parseFloat("0"); 
+!typeof parseFloat("0");
 // !typeof 0 -> !'number' -> false
 
-typeof "parseInt(null)" + 12 + !!Number(NaN); 
+typeof "parseInt(null)" + 12 + !!Number(NaN);
 /* 
   typeof "parseInt(null)" -> 'string'
   12
@@ -137,7 +137,7 @@ typeof "parseInt(null)" + 12 + !!Number(NaN);
   -> 'string12false'
 */
 
-!typeof (isNaN("")) + parseInt(NaN); 
+!typeof (isNaN("")) + parseInt(NaN);
 /* 
   !typeof (isNaN(""))
     + ！typeof false -> !'boolean' -> false
@@ -155,7 +155,7 @@ typeof !parseInt(null) + !isNaN(null)
 
 // 知识点4：typeof检测数据类型，返回的结果是一个字符串，字符串中包含了对应的数据类型
 // var a = typeof typeof typeof null;
-/* 
+/*
 typeof null -> "object"
 typeof "object" -> "string"
 typeof "string" -> "string"

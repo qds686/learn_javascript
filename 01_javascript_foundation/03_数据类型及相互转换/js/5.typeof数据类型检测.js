@@ -14,31 +14,30 @@ typeof value
     b. 所有的对象都是以“000 开头”，所以检测结果都是“object”，不能细分对象
   5. typeof 未被声明的变量 -> “undefined”
 */
-// console.log(typeof 1); // "number"
-// console.log(typeof NaN); // "number"
-// console.log(typeof Infinity); // "number"
-// console.log(typeof 'a'); // "string"
-// console.log(typeof true); // "boolean"
-// console.log(typeof undefined); // "undefined"
-// console.log(typeof Symbol()); // "symbol"
-// console.log(typeof 10n); // "bigint"
+console.log(typeof 1); // "number"
+console.log(typeof NaN); // "number"
+console.log(typeof Infinity); // "number"
+console.log(typeof 'a'); // "string"
+console.log(typeof true); // "boolean"
+console.log(typeof undefined); // "undefined"
+console.log(typeof Symbol()); // "symbol"
+console.log(typeof 10n); // "bigint"
 
-// console.log(typeof null); // "object"
+console.log(typeof null); // "object"
 
-// console.log(typeof {}); // "object"
-// console.log(typeof []); // "object"
-// console.log(typeof /^$/); // "object"
-// console.log(typeof new Date()); // "object"
-// console.log(typeof new Error()); // "object"
-// console.log(typeof new Number()); // "object"
-// console.log(typeof function(){}); // "function"
-// console.log(typeof (()=>{})); // "function"
+console.log(typeof {}); // "object"
+console.log(typeof []); // "object"
+console.log(typeof /^$/); // "object"
+console.log(typeof new Date()); // "object"
+console.log(typeof new Error()); // "object"
+console.log(typeof new Number()); // "object"
+console.log(typeof function () { }); // "function"
+console.log(typeof (() => { })); // "function"
 
-// console.log(typeof a); // "undefined"
+console.log(typeof a); // "undefined"
 
 // 不管多少个typeof结果都是"string"，因为最里边的typeof检测出来的结果永远都是字符串，逐层检测，最终还是string
-// console.log(typeof typeof [10, 20]); // "string"
-
+console.log(typeof typeof [10, 20]); // "string"
 
 // ======================
 // typeof 的应用
@@ -64,9 +63,9 @@ if (typeof val === "function") {
 
 // 4.处理浏览器兼容「ES6+语法规范，都不兼容IE」
 // 兼容的本质：是因为当前浏览器不具备这个“东西”，所以不兼容，这样我们就可以基于typeof检测它是否存在「哪怕不存在也不会报错，返回值是'undefined'」
-if (typeof Symbol !== "undefined") {
-  let sym = Symbol();
-}
+// if (typeof Symbol !== "undefined") {
+//   let sym = Symbol();
+// }
 
 (function () {
   let utils = {};
