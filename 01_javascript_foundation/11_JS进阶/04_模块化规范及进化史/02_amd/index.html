@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="./A.js"></script>
+  <script src="./B.js"></script>
+  <script src="./main.js"></script>
+</body>
+  <!-- IMPORT JS -->
+   <script src="./lib/require.js"></script>
+   <script src="./lib/main.js"></script>
+</html>
+
+<!-- 
+  AMD设计思想：在单例设计模式基础上，有效的解决了模块之间的依赖问题，告别之前“手动一点点分析依赖，按照顺序依次导入”的问题了，而且可以结合gulp/webpack等，最后把各个模块代码合并压缩打包在一起...
+    + 但是依赖的模块需要前置导入
+-->

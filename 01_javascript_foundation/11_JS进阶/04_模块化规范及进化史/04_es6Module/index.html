@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- IMPORT JS -->
+  <script type="module" src="./main.js"></script>
+</body>
+</html> 
+
+<!-- 
+在浏览器端开启ES6Module规范
+  + type="module"
+  + 基于标准的http/https协议的文本服务预览页面
+
+定义模块：和CommonJS类似，创建一个JS就相当于创建一个模块
+
+导出/导入模块：import需要放在模块最上面
+  1.export 声明变量且赋值; -> 可以使用多次
+  2.export default 值; 
+    -> 在一个模块中只能使用一次
+    基于imort * as A from '模块地址'; 导出一个Module对象
+    基于export default 值; 导出值
+
+  3.import x from '模块地址'; 
+  -> 浏览器端直接使用，地址中模块的后缀不能省略
+  -> 只能接收到基于 export default 导出的值
+  -> 原理：找到导出Module对象中的default属性值，把属性值赋值给X变量
+  -> 但是不能在这直接给x解构赋值 
+    @1 例如：import {m,n} from '模块地址'; 这样是不能给default后面的值解构赋值
+    @2 需要解构赋值，则先基于x接收，然后再给X解构赋值即可：例如：const {m,n}=x;
+
+  4.imort * as A from '模块地址';
+    把当前模块导出的所有内容获取到，赋值给X变量，后期基于 x.xx 访问即可「含x.default 获取export.default导出的值」
+      {
+        num:10,
+        obj:{...}
+        fn:function..
+        default:sum
+      }
+  5.import {num, obj} from '模块地址';
+    可以解构除了default的所有导出的内容
+
+-->
