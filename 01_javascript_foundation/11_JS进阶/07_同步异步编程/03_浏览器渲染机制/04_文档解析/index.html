@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // console.log(document.readyState); // loading
+    // document.onreadystatechange = function(){
+    //   console.log(document.readyState); // interactive complete
+    // }
+
+    // document.addEventListener('DOMContentLoaded', function (){
+    //   console.log('DOMContentLoaded'); // 在interactive之后触发，即当文档解析完成后它立马触发
+    // }, false);
+
+    // window.onload = function(){
+    //   console.log('onload'); // complete之后触发，异步和资源加载完成之后触发
+    // }
+
+    // =>文档解析完成
+    // // 在HTML文档中写这个
+    // $(document).ready(function(){});
+    // // 在单独的模块中写这个
+    // $(function(){});
+    // $(document).on('ready', function(){});
+  </script>
+  <script>
+    Document.prototype.domReady = function (fn) {
+      // fn:文档解析完毕要执行的函数
+      // 监听文档解析完毕
+      if (this.addEventListener) {
+        this.addEventListener('DOMContentLoaded', function () {
+          // 释放
+          // arguments.callee: 上一级函数
+          this.removeEventListener('DOMContentLoaded', arguments.callee, false);
+          fn();
+        }, false);
+      } else if (this.attachEvent) {
+        // IE
+        this.attachEvent()('onreadystatechange', function () {
+          // IE有些浏览器interactive监听不稳定，使用complete
+          if (this.readyState === 'complete') {
+            this.detachEvent('onreadystatechange', arguments.callee);
+            fn();
+          }
+        });
+      }
+
+      // 上面IE监听的时候还没有complete，就会走这里
+      // doScroll：IE低版本的API，大多数浏览器不存在，在文档没有解析完成之前会一直报错
+      if (this.documentElement.doScroll && typeof (window.frameElement) == 'undefined') {
+        try {
+          this.documentElement.doScroll('left');
+        } catch (e) {
+          // 报错延迟20ms重新执行domReady
+          return setTimeout(arguments.callee, 20);
+        }
+
+        // 一直到不报错之后执行方法，兼容IE6-7
+        fn();
+      }
+    }
+
+    function test() {
+      console.log('domReady');
+    }
+    document.domReady(test);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .buy {
+      width: 400px;
+      height: 100px;
+      margin: 0 auto;
+      line-height: 100px;
+      text-align: center;
+      background-color: #0c9;
+    }
+
+    .text {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="buy">
+    离抢购时间还剩
+    <span class="text">00:00:00</span>
+  </div>
+
+  <script>
+    /* 
+    两个时间：
+      + 目标时间：21:55:00
+      + 当前时间
+      目标时间-当前时间=时间差 「毫秒差：计算时间差中包含多少小时，多少分钟，多少秒」
+      每间隔一秒都需要重新获取当前时间「定时器」，重算时间差
+
+    核心的问题；
+      当前时间是不可以获取客户端本地的(因为本地的时间客户自己可以肆意的修改)，需要统一获取服务器的时间「响应头Date」
+      + 获取服务器时间会存在时间偏差问题 -> head AJAX状态码为2
+
+      在页面不刷新的情况下，每间隔1秒，不是再次从服务器获取(如果这样：服务器会崩溃，用户得到的时间误差也会越大...)，而是基于第一次获取的结果之上，手动给其累加1000ms即可
+    */
+    let countdownModule = (function () {
+      let textBox = document.querySelector('.text'),
+        serverTime = 0,
+        // 北京时间
+        targetTime = +new Date('2025/2/18 21:55:00'),
+        timer = null;
+
+      // 获取服务器时间
+      const queryServerTime = function queryServerTime() {
+        return new Promise(resolve => {
+          let xhr = new XMLHttpRequest;
+          xhr.open('head', '/');
+          xhr.onreadystatechange = () => {
+            // 状态码是2XX readyState为2响应头信息就有了
+            if ((xhr.status >= 200 && xhr.status <= 300) && xhr.readyState === 2) {
+              let time = xhr.getResponseHeader('Date');
+              // 获取的时间是格林尼治时间，需要变为北京时间
+              resolve(+new Date(time));
+            }
+          }
+          xhr.send(null);
+        });
+      };
+
+      const supplyZero = function applyZero(val) {
+        val = +val || 0;
+        return val < 10 ? `0${val}` : val;
+      }
+
+      // 计算
+      const computed = function computed() {
+        let diff = targetTime - serverTime;
+        if (diff <= 0) {
+          // 到达抢购时间了
+          textBox.innerHTML = '00:00:00';
+          clearInterval(timer);
+        }
+
+        // 没到时间
+        let hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * 3600000;
+        let minutes = Math.floor(diff / (1000 * 60));
+        diff -= minutes * 60000;
+        let seconds = Math.floor(diff / 1000);
+        textBox.innerHTML = `${supplyZero(hours)}:${supplyZero(minutes)}:${supplyZero(seconds)}`;
+      };
+
+      return {
+        async init() {
+          serverTime = await queryServerTime();
+          computed();
+          // 设置定时器
+          timer = setInterval(() => {
+            serverTime += 1000;
+            computed();
+          }, 1000);
+        }
+      }
+    })();
+    countdownModule.init();
+  </script>
+</body>
+
+</html>

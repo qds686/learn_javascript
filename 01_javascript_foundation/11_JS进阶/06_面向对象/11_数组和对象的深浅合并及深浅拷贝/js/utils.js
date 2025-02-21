@@ -237,7 +237,161 @@
     return obj;
   }
 
-  
+  /* 数组和对象的深浅合并 */
+  /**
+   * @param  {array || object} params 
+   * @return {array || object} target
+   * 使用情况：
+   *   merge(obj1, obj2, obj3)
+   *   merge(true, obj1, obj2, obj3)
+   */
+  const merge = function merge(...params) {
+    // 替换项
+    let options,
+      // 被替换项，第一项也没有，默认为空对象，后面判断
+      target = params[0],
+      // 索引
+      i = 1,
+      // arguments的长度
+      length = params.length,
+      // 是否为深合并
+      deep = false,
+      // 最后一项值，是一个Set集合，记录哪些对象已经处理过了
+      treated = params[length - 1];
+
+    // 最开始没有treated或者递归的时候有了
+    // if (toType(treated) === "set" && treated.isHandler) {
+    //   // 递归执行merge的情况，最后一项Set不循环
+    //   length--;
+    // } else {
+    //   // 第一次执行merge，最后一项是一个对象，不符合上面的条件，创建一个Set集合
+    //   thraeted = new Set();
+    //   treated.isHandler = true;
+    // }
+
+    // 一般情况不对Set结构进行合并，所以最后一项没有Set，不做有标识严谨的判断
+    toType(treated) === "set" ? length-- : treated = new Set();
+
+    // 如果第一个参数是布尔值，那么就是深度合并
+    if (typeof target === "boolean") {
+      // 第一项值给deep
+      deep = target;
+      target = params[i];
+      i++;
+    }
+
+    // 必须保证被替换项是一个对象
+    if (target == null || (typeof target !== "object" && !isFunction(target))) target = {};
+
+    // 迭代传递的剩下的对象，依次替换target
+    for (; i < length; i++) {
+      // 获取某一个替换项
+      options = params[i];
+
+      // 替换项存在才循环
+      if (options == null) continue;
+
+      // 防止死递归的处理，如果Set集合中已经存在了，就不再处理
+      if (treated.has(options)) return options;
+      // 把当前处理的对象放到Set集合中
+      treated.add(options);
+
+      // 依次拿出替换项中的某一项，替换被替换项中同名的这一项
+      // copy：替换中的某一项属性值，name：替换中某一项的属性名
+      each(options, (copy, name) => {
+        // 检测属性值是否为数组
+        let copyIsArray = Array.isArray(copy),
+          // 检测属性值是否为对象
+          copyIsObject = isPlainObject(copy),
+          // 被替换项中的某一项
+          src = target[name];
+        if (deep && copy && (copyIsArray || copyIsObject)) {
+          // 深合并
+          // 如果替换中的某一项是数组，被替换中的某一项不是数组，则让被替换中的src为空数组
+          if (copyIsArray && !Array.isArray(src)) src = [];
+          if (copyIsObject && !isPlainObject(src)) src = {};
+          // 递归的时候要传递treated标识
+          target[name] = merge(deep, src, copy, treated);
+        } else if (copy !== undefined) {
+          // 浅合并 target中的某一项替换为copy
+          target[name] = copy;
+        }
+      });
+    }
+    // 返回被替换项
+    return target;
+  }
+
+  /* 实现数组和对象的深浅拷贝 */
+  /**
+   * 使用：
+   *   clone(obj) 浅拷贝
+   *   clone(true, obj) 深拷贝
+   */
+  const clone = function clone(...params) {
+    // target被拷贝的值 deep深浅拷贝 
+    let target = params[0],
+      deep = false,
+      length = params.length,
+      type,
+      i = 1,
+      isArray,
+      isObject,
+      result,
+      treated;
+
+    if (toType(treated) !== 'set') treated = new Set();
+
+    // clone(true) 长度必须大于1，这种情况只克隆true
+    // clone(true, obj) 才是进行深拷贝的
+    if (typeof target === 'boolean' && length > 1) {
+      deep = target;
+      target = params[1];
+      i = 2;
+    }
+    // 给需要克隆的下一项设置Set集合，第一次进来没有就设置一个空集合，并且把处理过的添加进集合，下次进来的时候判断，有了就不处理了
+    // 防止死递归
+    treated = params[i];
+    if (!treated) treated = new Set();
+    if (treated.has(target)) return target;
+    treated.add(target);
+
+    type = toType(target);
+    isArray = Array.isArray(target);
+    isObject = isPlainObject(target);
+
+    // 特殊值的拷贝，函数不需要拷贝，没有意义
+    if (target == null) return target;
+
+    if (!isArray && !isObject && !isFunction(target) && typeof target === "object") {
+      // 只有标准特殊对象和非标准特殊对象
+      try {
+        return new target.constructor(target);
+      } catch(_) { // bigint/symbol等不能被new的直接返回
+        return target;
+      }
+    }
+
+    if (!isArray && !isObject) return target;
+
+    // 剩下数组和纯粹对象
+    // 创建一个空数组或者对象，把需要克隆的对象和数组放到result中即可
+    result = new target.constructor();
+
+    each(target, (copy, name) => {
+      // copy属性值 name属性名
+      if (deep) {
+        // 深拷贝
+        result[name] = clone(deep, copy, treated);
+        return;
+      }
+      // 浅拷贝
+      result[name] = copy;
+    });
+
+    return result;
+  }
+
   const utils = {
     toType,
     isFunction,
@@ -249,7 +403,9 @@
     debounce,
     throttle,
     mergeArray,
-    each
+    each,
+    merge,
+    clone
   };
 
   // 处理冲突：在Node和webpack中不存在冲突，保证导入的库定义的名字不重复即可，在浏览器中会重复

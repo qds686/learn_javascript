@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="text/javascript"></script>
+</head>
+
+<body>
+  <!-- <script type="text/javascript">
+    // 主动创建就是异步加载，不会阻塞GUI渲染
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    // 此处utils已经下载，但不会执行
+    s.src = 'utils.js';
+    // 加载到页面
+    document.body.appendChild(s);
+
+    // 问题：异步加载会阻塞window.onload
+    window.onload = function () {
+      test();
+    }
+  </script> -->
+
+  <!-- <script type="text/javascript">
+    (function () {
+      function async_load() {
+        var s = document.createElement('script'),
+          oScript = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = './js/utils.js';
+
+        // 此处不能直接添加到页面上，异步的一般都放在上面
+        // document.body.appendChild(s);
+        oScript.parentNode.insertBefore(s, oScript);
+      }
+
+      if (window.attachEvent) {
+        window.attachEvent('onload', async_load);
+      } else {
+        window.addEventListener('load', async_load, false);
+      }
+    })();
+  </script> -->
+  <script>
+    exec_util_width_loading_script('./js/utils.js', 'test');
+
+    function exec_util_width_loading_script(url, fn) {
+      var s = document.createElement('script'),
+        oScript = document.getElementsByTagName('script')[0];
+      s.type = 'text/javascript';
+
+      if (s.readyState) { // 文件返回的状态码
+        s.onreadystatechange = function () {
+          var state = s.readyState;
+
+          if (state === 'complate' || state === 'loaded') {
+            utils[fn]();
+          }
+        }
+      } else {
+        s.onload = function () {
+          utils[fn]();
+        }
+      }
+      // 放在下面，不会阻塞onLoad
+      s.src = url;
+      oScript.parentNode.insertBefore(s, oScript);
+    }
+  </script>
+</body>
+
+</html>

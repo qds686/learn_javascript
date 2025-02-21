@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="first" />
+  <input type="text" id="second" />
+  <div>
+    <button data-field="plus">相加</button>
+    <button data-field="minus">相减</button>
+    <button data-field="mul">相乘</button>
+    <button data-field="div">相除</button>
+  </div><!--  -->
+
+  <!-- IMPORT JS -->
+  <script type="text/javascript" src="async.js"></script>
+  <script type="text/javascript">
+    init_modules();
+  </script>
+  <script type="text/javascript">
+    /* 异步加载utils */
+    (function () {
+      var oScript = document.createElement('script'),
+        script = document.getElementsByTagName('script')[0];
+      oScript.type = 'text/javascript';
+      oScript.src = 'utils.js';
+      script.parentNode.insertBefore(oScript, script);
+    })();
+  </script>
+</body>
+
+</html>
