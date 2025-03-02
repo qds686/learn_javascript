@@ -77,6 +77,23 @@ for (var char of str) {
   // console.log(char); //  'j' 'i' 'u' 'c' 'a' 'i' 'h' 'e' 'z' 'i'
 }
 
+// 需求：接收任意一个字符串，算出这个字符串的总字节数
+var getBytes = function getBytes(str){
+  var len = str.length,
+      byte = 0;
+  if(typeof str !== 'string') return;
+  for(var i = 0; i < len; i++){
+    var code = str.charCodeAt(i);
+    if(code < 255){
+      byte++;
+    }else {
+      byte += 2;
+    }
+  }
+  return byte;
+};
+console.log(getBytes('我爱编程'));
+
 // 4. indexOf / lastIndexOf
 // 4.1 一个参数：找的内容
 var str = 'jiucaihezi';

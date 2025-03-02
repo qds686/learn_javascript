@@ -16,6 +16,7 @@
 // console.log("10" == [10]); // true [10]->"10"
 
 // 需求：验证obj是否为一个对象
+/* 
 var obj = {};
 
 var isObj = function isObj(obj) {
@@ -23,16 +24,32 @@ var isObj = function isObj(obj) {
   retrun obj !== null && type === 'object';
 }
 var result = isObj(obj);
-console.log(result); // true
+console.log(result); // true 
+*/
 
 // 装箱和拆箱
 let num = 10;
+num.xx = 11;
 console.log(num.toFixed(2)); // 10.00
+console.log(num.xx); // undefined
 // num是原始值，不是对象，是不能做“成员访问”
 // 默认装箱操作：new Number(num) 变为非标准特殊对象(包装类型)，这样就可以调用 toFixed
 
 console.log(10 + new Number(10)); // 20
 // 在操作的过程中，浏览器会把num这个非标准特殊对象变为原始值，通过Symbol.toprimitive->valueOf->toString->Number，这个操作叫做拆箱
+
+// =======
+var name = 'javascript';
+name += 10;
+var type = typeof (name); // 'string'
+if(type.length === 6){ // 读取length属性，JavaScript内部对其默认装箱，使得原始类型具有String中的属性和方法
+  //=> new String(type).text = 'string'
+  // 属性设置完并没有接收这个临时的包装对象，所以会删除delete，后面访问的时候不存在
+  type.text = 'string';
+}
+console.log(type.text); // undefined
+
+// ======
 
 // 基于“==”进行比较的，会转换数据类型，有两种解决方案：
 // 只有是一个对象，我们才能重构其转化的步骤
@@ -65,12 +82,13 @@ var a = {
 // }
 
 // 全局上下文中，获取a的值：首先看VO(G)中有没有，没有再继续去GO(window)中查找
-var i = 0;
-Object.defineProperty(window, 'a', {
-  get() {
-    return ++i;
-  },
-  set(val) {
-    return val;
-  }
-});
+// var i = 0;
+// Object.defineProperty(window, 'a', {
+//   get() {
+//     return ++i;
+//   },
+//   set(val) {
+//     return val;
+//   }
+// });
+
