@@ -1,0 +1,71 @@
+.box {
+  box-sizing: border-box;;
+  width: 480px;
+  height: 590px;
+  margin: 0 auto;
+  color: #fff;
+  background-image: url("../img/bg.png");
+  font-size: 16px;
+}
+
+/* 操作区域 */
+.box .list {
+  padding: 50px 20px 0;
+  height: 387px;
+}
+
+.box .list-item {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* 按钮 */
+.minus,
+.plus
+ {
+  position: relative;
+  top: 2px;
+  width: 52px;
+  height: 44px;
+  cursor: pointer;
+  background-image: url("../img/sub.png");
+}
+
+.plus {
+  background-image: url("../img/add.png");
+}
+
+/* 文本 */
+.pronum,
+.info {
+  min-width: 40px;
+  height: 35px;
+  padding: 0 5px;
+  line-height: 35px;
+  margin: 0 10px;
+  border-radius: 5px;
+}
+
+.pronum {
+  background-color: #fff;
+  color: #000;
+}
+
+.info {
+  text-align: left;
+  width: 236px;
+  background-color: #000;
+}
+
+.bottom {
+  line-height: 10px;
+  padding: 20px 10px;
+}
+
+.bottom .pronum {
+  display: inline-block;
+  margin: 0;
+  text-align: center;
+}

@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+.slider-wrap {
+  width: 996px;
+  height: 480px;
+  margin: 50px auto;
+  border: 1px solid #000;
+}
+
+.slider {
+  position: relative;
+  float: left;
+  width: 853px;
+  height: 480px;
+}
+
+.slider .slider-item {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 853px;
+  height: 480px;
+}
+
+.slider .slider-item.active {
+  display: block;
+}
+
+.thumbs {
+  float: left;
+  width: 143px;
+  height: 480px;
+}
+
+.thumbs .thumbs-item {
+  height: 80px;
+  opacity: .5;
+}
+
+.thumbs .thumbs-item.cur {
+  opacity: 1;
+}

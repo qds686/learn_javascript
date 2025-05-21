@@ -122,7 +122,7 @@
  *   + n,m,x 从索引n开始删除m个元素 ,用x占用删除的部分
  * 返回：把删除的部分用新数组存储起来返回
  */
-// let ary = [10,20,30,40,50];
+// let arr = [10, 20, 30, 40, 50];
 // let res = ary.splice(1,2,'AA');
 // console.log(res,ary);//[20,30]  [10,'AA',40,50]
 
@@ -162,7 +162,7 @@
 // // 1.4 如果slice()的参数有负值，那么就以数组长度加上这个负数来确定位置，案例如下
 // // 长度为5，slice（-5，-1）就相当于slice(0，4)
 // res = ary.slice(-5, -1);
-// console.log(res); //[10, 20, 30, 40] 
+// console.log(res); //[10, 20, 30, 40]
 
 // // 1.5 如果结束位置小于开始位置，则返回空数组
 // res = ary.slice(5, 2);
@@ -224,7 +224,7 @@
  * 作用：检测当前项在数组中第一次或者最后一次出现位置的索引(IE6-8不兼容)
  * 参数：要检索的这项内容 (n, m)
  *   + n: 检索的项
- *   + m: 
+ *   + m:
  *     + 如果是indexOf，就是从索引m开始检索
  *     + 如果是lastIndexOf，就是从索引m停止检索
  * 返回值：这一项出现的位置索引值(数字)，如果数组中没有这一项，返回的结果是-1
@@ -253,7 +253,7 @@
 
 // // 5.1 数组中存放的是原始类型数组中，查找元素的几种方法
 // var names = ["abc", "cba", "nba", "mba"];
-// // @1 indexOf 
+// // @1 indexOf
 // //   + 可以找到，返回对应的索引
 // //   + 找不到返回 -1
 // console.log(names.indexOf("abc")); // 0
@@ -300,7 +300,7 @@
 //   return item === "nba"
 // })
 // // var findIndex = names.findIndex(item => item === "nba")
-// console.log(findIndex)//2 
+// console.log(findIndex)//2
 
 /**
  * 6.reverse
@@ -320,26 +320,26 @@
  */
 
 // 1.基本用法
-let ary = [7, 8, 5, 2, 4, 6];
-ary.sort();
-console.log(ary); // [2, 4, 5, 6, 7, 8]
+// let ary = [7, 8, 5, 2, 4, 6];
+// ary.sort();
+// console.log(ary); // [2, 4, 5, 6, 7, 8]
 
 // 2.多位数排序
 // sort方法如果不传递参数，是无法处理10以上数字排序的（默认按照第一个字符来排序，不是我们想要的效果）
 
 // 想要实现多位数正常排序，需要个sort传递一个函数，函数中返回a-b实现升序，返回 b-a 实现降序（冒泡排序）
-let ary = [12, 15, 6, 7, 43];
-ary.sort(function (a, b) {
-  return a - b;
-});
-console.log(ary); // [6, 7, 12, 15, 43]
+// let ary = [12, 15, 6, 7, 43];
+// ary.sort(function (a, b) {
+//   return a - b;
+// });
+// console.log(ary); // [6, 7, 12, 15, 43]
 
 // 3.sort原理
-//   + 负值，a就排前面; 
-//   + 正值，b就排前面; 
+//   + 负值，a就排前面;
+//   + 正值，b就排前面;
 //   + 0保持不变
 // 自定义排序
-let ary = [12, 15, 6, 7, 43];
+/* let ary = [12, 15, 6, 7, 43];
 
 ary.sort(function (a, b) {
   if (a > b) {
@@ -348,17 +348,17 @@ ary.sort(function (a, b) {
     return -1;
   }
 });
-console.log(ary); //  [6, 7, 12, 15, 43]
+console.log(ary); //  [6, 7, 12, 15, 43] */
 
 // 改写
-ary.sort((a, b) => {
+/* ary.sort((a, b) => {
   // a 和 b是相邻的两项
   return a - b;
 });
-console.log(ary);
+console.log(ary); */
 
 // 实现随即排序
-arr.sort(function (a, b) {
+/* arr.sort(function (a, b) {
   /*
      var rand = Math.random();
      if(rand - 0.5 > 0){
@@ -366,12 +366,12 @@ arr.sort(function (a, b) {
      }else{
        return -1;
      }
-  */
+  *!/
   return Math.random() - 0.5;
-});
+}); */
 
 // 实现在引用数据类型中排序
-var arr = [
+/* var arr = [
   {
     son: 'Jenny',
     age: 14
@@ -384,8 +384,5 @@ var arr = [
 ];
 arr.sort(function (a, b) {
   return a.age - b.age;
-});
-
-
-
+}); */
 
