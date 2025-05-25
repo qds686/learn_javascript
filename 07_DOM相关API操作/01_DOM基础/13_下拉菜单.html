@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    a {
+      text-decoration: none;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .dropdown {
+      position: relative;
+      width: 200px;
+      height: 50px;
+      background-color: #000;
+    }
+
+    .dropdown::after {
+      position: absolute;
+      top: 18px;
+      right: 15px;
+      content: "";
+      display: block;
+      width: 15px;
+      height: 15px;
+      background-image: url(icons/arrow-up.png);
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+
+    .dropdown.active::after {
+      /* transform: rotate(180deg); */
+      background-image: url(icons/arrow-down.png);
+    }
+
+    .dropdown a {
+      display: block;
+    }
+
+    .dropdown .main {
+      height: 100%;
+      text-align: center;
+      line-height: 50px;
+      color: #fff;
+    }
+
+    .dropdown .list {
+      display: none;
+    }
+
+    .dropdown .item {
+      height: 40px;
+      text-align: center;
+      background-color: #333;
+    }
+
+    .dropdown .item a {
+      height: 100%;
+      line-height: 40px;
+      color: #999;
+    }
+
+    .dropdown .item a:hover {
+      color: #fff;
+      background-color: #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dropdown">
+    <a href="javascript:;" class="main">下拉菜单</a>
+    <ul class="list">
+      <li class="item"><a href="">第1个项目</a></li>
+      <li class="item"><a href="">第2个项目</a></li>
+      <li class="item"><a href="">第3个项目</a></li>
+      <li class="item"><a href="">第4个项目</a></li>
+      <li class="item"><a href="">第5个项目</a></li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    var oDropdown = document.getElementsByClassName('dropdown')[0],
+
+      // 寻找子元素节点
+      // oList = oDropdown.getElementsByClassName('list')[0];
+      oList = elemChildren(oDropdown)[1];
+
+    oDropdown.onmouseenter = function () {
+      this.className += ' active';
+      oList.style.display = 'block';
+    }
+
+    oDropdown.onmouseleave = function () {
+      this.className = 'dropdown';
+      oList.style.display = 'none';
+    }
+
+    function elemChildren(node) {
+      var temp = {
+        length: 0,
+        push: Array.prototype.push,
+        splice: Array.prototype.splice
+      };
+      var children = node.childNodes,
+        len = children.length,
+        item;
+
+      for (var i = 0; i < len; i++) {
+        item = children[i];
+
+        if (item.nodeType === 1) {
+          temp.push(item);
+        }
+      }
+      return temp;
+    }
+  </script>
+</body>
+
+</html>

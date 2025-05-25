@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    div {
+      padding: 10px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div style="width: 100px; height: 200px; background-color: green;"></div>
+
+  <script type="text/javascript">
+    var oDiv = document.getElementsByTagName('div')[0];
+
+    /*
+      1.查看计算样式：把样式的属性都会计算成绝对值
+        + window.getComputedStyle(elem, null)[prop] 不确定的
+        + window.getComputedStyle(elem, null).prop 确定的用
+        + rem -> px，#000 -> rgba/rgb
+        + IE8及以下不支持，支持elem.currentStyle
+    */
+
+    // 参数：元素节点，props(String):属性
+    function getStyles(elem, prop) {
+      if (window.getComputedStyle) {
+        if (prop) {
+          return parseInt(window.getComputedStyle(elem, null)[prop]);
+        } else {
+          return window.getComputedStyle(elem, null);
+        }
+      } else {
+        if (prop) {
+          return parseInt(elem.currentStyle[prop]);
+        } else {
+          return elem.currentStyle;
+        }
+      }
+    }
+    // console.log(getStyles(oDiv)); // 返回CSSStyleDeclaration集合
+    // console.log(getStyles(oDiv, 'height')); // 200
+
+    /* 
+      2.访问css
+        + elem.style.xxx 通过行内样式访问css，如果没写就是空字符串
+        + elem.offsetWidth/offsetHeight 通过底层渲染引擎访问
+          + 加了padding之后，会把padding的值计算在内
+    */
+    // console.log(oDiv.style.border); // 返回空字符串
+    // console.log(oDiv.offsetWidth); // 102 加了padding之后是122
+  </script>
+</body>
+
+</html>

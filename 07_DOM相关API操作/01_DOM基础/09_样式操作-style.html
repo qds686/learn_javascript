@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* div {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+    } */
+  </style>
+</head>
+
+<body>
+  <div></div>
+
+  <script>
+    // DOM间接操作CSS
+    var oDiv = document.getElementsByTagName("div")[0];
+
+    // style不能操作和访问CSS，只能访问行内样式
+    // console.log(oDiv.style.width); // "" 
+
+    // style是可读可写的
+    oDiv.style.width = '200px';
+    oDiv.style.height = '200px';
+    // 小驼峰写
+    oDiv.style.backgroundColor = 'green';
+    oDiv.style.border = '5px solid #000';
+    oDiv.style.position = 'absolute';
+    oDiv.style.left = '200px';
+    oDiv.style.top = '300px';
+
+    // 复合值拆解写
+    // oDiv.style.border = '5px solid #000';
+    oDiv.style.borderWidth = '5px';
+    oDiv.style.borderStyle = 'solid';
+    oDiv.style.borderColor = '#000';
+
+    // 保留字之前加css，更规范，不加也不影响
+    // oDiv.style.cssFloat = 'left';
+
+    // 值是字符串
+    console.log(oDiv.style.width); // '200px'
+
+    console.log(oDiv.style); // CSSStyleDeclaration{...} 在这里可以查看所有设置了样式的属性，没有设置的则是默认值
+
+  </script>
+</body>
+
+</html>
