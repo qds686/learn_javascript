@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="width: 5000px;border: 1px solid #000"></div>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+  <script>
+    // 查看滚动条的距离
+    // 常见的方法：
+    //   + window.pageXOffset/pageYOffset，IE9及以下不支持
+    //   + document.body.scrollLeft/scrollTop
+    //   + document.documentElement.scrollLeft/scrollTop
+    // 不常见的：
+    //   + window.scrollX/scrollY
+
+    function getScrollOffset() {
+      if (window.pageXOffset) {
+        return {
+          left: window.pageXOffset,
+          top: window.pageYOffset
+        }
+      } else {
+        return {
+          left: document.body.scrollLeft + document.documentElement.scrollLeft,
+          top: document.body.scrollTop + document.documentElement.scrollTop
+        }
+      }
+    }
+    // console.log(getScrollOffset()); 
+  </script>
+</body>
+
+</html>

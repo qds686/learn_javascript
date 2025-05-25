@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .grandpan {
+      position: relative;
+      left: 60px;
+      top: 60px;
+      width: 360px;
+      height: 360px;
+      border: 10px solid #000;
+      background-color: #ccc;
+    }
+
+    .parent {
+      position: absolute;
+      left: 40px;
+      top: 40px;
+      width: 280px;
+      height: 280px;
+      border: 10px solid #000;
+      background-color: lightblue;
+    }
+
+    .son {
+      position: absolute;
+      top: 70px;
+      left: 70px;
+      width: 140px;
+      height: 140px;
+      background-color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grandpan">
+    <div class="parent">
+      <div class="son"></div>
+    </div>
+  </div>
+
+  <script>
+    var son = document.getElementsByClassName('son')[0];
+
+    // 获取当前元素距离body的左/上偏移（无论其父参照物是谁）
+    function getElemDocPosition(el) {
+      var parent = el.offsetParent,
+        offsetLeft = el.offsetLeft,
+        offsetTop = el.offsetTop;
+
+      // 存在父参照物，而且还没有找到body，虽然少算了body的边框，但是也没有问题，因为计算到父参照物的里边框，不包括边框
+      while (parent && parent.tagName !== 'body') {
+        // 在原有偏移的基础上累加:父参照物的边框+父参照物的偏移
+        if (!/MSIE 8\.0/.test(navigator.userAgent)) {
+          //IE8中偏移值自己就算了边框了，不需要我们再加边框的值
+          //navigator.userAgent获取当前浏览器的版本信息
+          offsetLeft += parent.clientLeft;
+          offsetTop += parent.clientTop;
+        }
+        offsetLeft += parent.offsetLeft;
+        offsetTop += parent.offsetTop;
+        //继续获取上级参照物
+        parent = parent.offsetParent;
+      }
+      return {
+        left: offsetLeft,
+        top: offsetTop
+      }
+    }
+    getElemDocPosition(son);//获取son相对于body的偏移
+  </script>
+</body>
+
+</html>

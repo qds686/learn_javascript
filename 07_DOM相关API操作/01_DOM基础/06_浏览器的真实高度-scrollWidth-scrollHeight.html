@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="width: 4000px; height: 5000px; border: 1px solid #000;"></div>
+  <script>
+    /* 
+    ✅ scrollWidth
+      + 表示元素内容的实际宽度（包括不可见部分），单位是像素。
+      + 如果内容没有溢出容器，则 scrollWidth 等于内容的宽度。
+      + 如果内容溢出了容器（例如设置了 overflow: auto），那么 scrollWidth 是整个内容的宽度，包括不可见的部分。
+    ✅ scrollHeight
+      + 同理，表示元素内容的实际高度（包括不可见部分）。
+      + 常用于判断页面是否可以垂直滚动。
+    */
+
+    // 浏览器的真实宽高
+    // 浏览器的真实宽度=浏览器可视宽度+横向滚动条偏移量
+    // scrollWidth = window.innerWidth + pageXOffset
+    function getScrollSize() {
+      if (document.body.scrollWidth) {
+        return {
+          width: document.body.scrollWidth,
+          height: document.body.scrollHeight
+        }
+      } else {
+        return {
+          width: document.documentElement.scrollWidth,
+          height: document.documentElement.scrollHeight
+        }
+      }
+    }
+
+    // console.log(getScrollSize()); // {width: 4002, height: 5002}
+  </script>
+</body>
+
+</html>

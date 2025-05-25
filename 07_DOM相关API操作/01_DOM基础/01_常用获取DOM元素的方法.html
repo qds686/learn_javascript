@@ -8,55 +8,42 @@
 </head>
 
 <body>
-  <!-- 技能列表 -->
-  <div class="box clearFix" id="box" style="font-size: 12px;">
+  <!-- <div class="box clearFix" id="box" style="font-size: 12px;">
     <h3 class="title">前端开发需要掌握的内容</h3>
     <ul class="list">
-      <!-- 基本技能 -->
       <li>HTML5+CSS3以及响应式布局开发</li>
       <li>JS(包含ES5/ES6)以及底层机制</li>
       <li>AJAX/HTTP/跨域处理等</li>
-      <!-- 进阶技能 -->
       <li>webpack/git等工程化部署</li>
       <li>vue全家桶实战开发</li>
       <li>React全家桶实战开发</li>
       <li>nodejs全栈开发</li>
       <li>小程序、uni-app、flutter等</li>
     </ul>
-  </div>
+  </div>  -->
+
+  <div>123</div>
+  <div>234</div>
+  <div>345</div>
+  <script>
+    // var divs = document.getElementsByTagName('div');
+    // var divs = document.querySelectorAll('div');
+    // console.log(divs); //[3个]
+    // divs[1].remove();
+    // console.log(divs); //[3个] 增加或删除之后不改变
+  </script>
 
   <script>
-
-    /* 
+    /*
     DOM (文档对象模型 document object modal)：提供一系列的属性和方法，可以供我们操作页面中的元素
       + 修改或获取元素的样式和内容等
       + 动态增加或者删除元素
       + 获取元素或者其他节点
-    */ 
-    
-    /* 
-    Node节点：在页面中出现的任何内容都被称为节点
-      + 元素节点：元素标签
-        + nodeType:1
-        + nodeName:大写标签名
-        + nodeValue:null
-      + 文本节点：文本内容 + 换行和空格
-        + nodeType:3
-        + nodeName:#text
-        + nodeValue:文本内容
-      + 注释节点：注释内容
-        + nodeType:8
-        + nodeName:#comment
-        + nodeValue:注释内容
-      + 文档节点：document
-        + nodeType:9
-        + nodeName:#document
-        + nodeValue:null 
     */
-      
-    /* 
+
+    /*
     获取元素的6个方法，3个属性
-      1.document.documentElement：获取HTML元素 
+      1.document.documentElement：获取HTML元素
       2.document.head：获取head元素
       3.document.body：获取body元素
       4.document.getElementById([ID]): 指定在文档中，基于元素的ID获取这个元素对象
@@ -73,8 +60,12 @@
         + 项目中我们往往只针对表单元素这样操作，在IE浏览器中只有表单元素设置NAME有作用
       8.context.queryselector(SELECTOR):在指定上下文中，通过选择器获取到指定的第一个元素对象（即使有多个符合也选择第一个）
       9.context.queryselectorA11(SELECTOR): 在指定上下文中，通过选择器获取到指定的元素集合(在IE6~8中不兼容,不实时)
-        + 增加或删除元素之后，获取的还是不变，不实时 
+        + 增加或删除元素之后，获取的还是不变，不实时
     */
+    // var div1 = document.querySelector('div');
+    // console.log(div1); // 只能选择第一个元素
   </script>
+
 </body>
+
 </html>

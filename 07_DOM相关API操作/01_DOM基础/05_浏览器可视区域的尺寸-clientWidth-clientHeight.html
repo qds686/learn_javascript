@@ -1,0 +1,48 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="width: 5000px; height: 300px;"></div>
+  <script>
+    // 浏览器可视区域的尺寸（窗口的宽高）
+    // 常规方法：
+    //   + window.innerWith/innerHeight
+    //   + 标准模式：document.documentElement.clientWidth/clientHeight
+    //   + 怪异模式：document.body.clientWidth/clientHeight 
+
+    function getViewportSize() {
+      if (window.innerWidth) {
+        return {
+          width: window.innerWidth,
+          height: window.innerHeight
+        }
+      } else {
+        if (document.copatMode === 'BackCompat') {
+          return {
+            width: document.body.clientWidth,
+            height: document.body.clientHeight
+          }
+        } else {
+          return {
+            width: document.documentElement.clientWidth,
+            height: document.documentElement.clientHeight
+          }
+        }
+      }
+    }
+
+  </script>
+</body>
+
+</html>

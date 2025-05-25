@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 
+    在IE中不显示宽高，增加padding和margin的时候，盒子的宽高会变大，也就是不是box-sizing:border-box
+    */
+    .box {
+      position: absolute;
+      top: 200px;
+      left: 200px;
+      width: 200px;
+      height: 200px;
+      margin: 10px;
+      padding: 10px;
+      background-color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+
+  <script>
+    var box = document.getElementsByClassName('box')[0];
+
+    // DOMRect { bottom: 400, height: 200, left: 200, right: 400, top: 200, width: 200, x: 200, y: 200 }
+    // console.log(box.getBoundingClientRect()); 
+
+    var info = box.getBoundingClientRect();
+
+    box.style.width = '400px';
+    console.log(info); // 修改属性，获取的结果中没有改变 => “不实时”
+  </script>
+</body>
+
+</html>
