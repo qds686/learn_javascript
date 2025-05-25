@@ -53,7 +53,12 @@
     }
 
     .dropdown .list {
-      display: none;
+      /* 无动画，直接隐藏元素 */
+      /* display: none; */
+
+      /* 有动画，在JS中控制height的动画 */
+      height: 0;
+      overflow: hidden;
     }
 
     .dropdown .item {
@@ -91,18 +96,47 @@
 
       // 寻找子元素节点
       // oList = oDropdown.getElementsByClassName('list')[0];
-      oList = elemChildren(oDropdown)[1];
+      oList = elemChildren(oDropdown)[1],
+
+      // 设置定时器
+      timer = null,
+      // list初始高度
+      listHeight = 0,
+      // 每次增加多少像素
+      speed = 8;
 
     oDropdown.onmouseenter = function () {
       this.className += ' active';
-      oList.style.display = 'block';
+      // oList.style.display = 'block';
+
+      // 第一次进入的时候就清除定时器
+      clearInterval(timer);
+      timer = setInterval(function () {
+        if (listHeight >= 200) {
+          clearInterval(timer);
+          return;
+        }
+        listHeight = parseInt(getStyles(oList, 'height')) + speed;
+        oList.style.height = listHeight + 'px';
+      }, 1);
     }
 
     oDropdown.onmouseleave = function () {
       this.className = 'dropdown';
-      oList.style.display = 'none';
+      // oList.style.display = 'none';
+
+      timer = setInterval(function () {
+        if (listHeight <= 0) {
+          clearInterval(timer);
+          return;
+        }
+        console.log(listHeight)
+        listHeight = parseInt(getStyles(oList, 'height')) - speed;
+        oList.style.height = listHeight + 'px';
+      }, 1);
     }
 
+    // 获取元素子节点
     function elemChildren(node) {
       var temp = {
         length: 0,
@@ -121,6 +155,23 @@
         }
       }
       return temp;
+    }
+
+    // 获取元素样式
+    function getStyles(elem, prop) {
+      if (window.getComputedStyle) {
+        if (prop) {
+          return window.getComputedStyle(elem, null)[prop];
+        } else {
+          return window.getComputedStyle(elem, null);
+        }
+      } else {
+        if (prop) {
+          return elem.currentStyle[prop];
+        } else {
+          return elem.currentStyle;
+        }
+      }
     }
   </script>
 </body>
