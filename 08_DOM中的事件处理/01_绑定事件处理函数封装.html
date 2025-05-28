@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>点击</button>
+
+  <script>
+    var oBtn = document.getElementsByTagName('button')[0];
+
+    // 绑定事件处理函数
+    addEvent(oBtn, 'click', function () {
+      console.log(1);
+    });
+
+    // 绑定事件处理函数
+    function addEvent(el, type, fn) {
+      if (el.addEventListener) {
+        el.addEventListener(type, fn, false);
+      } else if (el.attachEvent) {
+        el.attachEvent('on' + type, function () {
+          // 指向函数this指向el
+          fn.call(el);
+        });
+      } else {
+        el['on' + type] = fn;
+      }
+    }
+
+
+  </script>
+</body>
+
+</html>

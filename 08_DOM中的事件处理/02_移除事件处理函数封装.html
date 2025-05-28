@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      margin: 0;
+    }
+
+    button {
+      outline: none;
+      border: none;
+    }
+
+    button {
+      display: block;
+      width: 100px;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      margin: 20px auto;
+      background-color: red;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    button.got {
+      background-color: #999;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 优惠券，领取之后不能再点击领取 -->
+  <button>领取优惠券</button>
+
+  <script>
+    var oBtn = document.getElementsByTagName('button')[0];
+
+    /* oBtn.onclick = function () {
+      this.innerHTML = '已领取';
+      this.className += 'got';
+
+      this.onclick = null;
+    } */
+
+    /* addEvent(oBtn, 'click', function () {
+      this.innerHTML = '已领取';
+      this.className += 'got';
+
+      removeEvent(oBtn, 'click', arguments.callee);
+    }); */
+
+    addEvent(oBtn, 'click', getCoupons);
+
+    function getCoupons() {
+      this.innerHTML = '已领取';
+      this.className += 'got';
+      removeEvent(oBtn, 'click', getCoupons);
+    }
+
+    // 移除事件处理函数
+    function removeEvent(el, type, fn) {
+      if (el.addEventListener) {
+        el.addEventListener(type, fn, false);
+      } else if (el.attachEvent) {
+        el.detachEvent('on' + type, function () {
+          fn.call(el);
+        });
+      } else {
+        el['on' + type] = fn;
+      }
+    }
+
+    function addEvent(el, type, fn) {
+      if (el.addEventListener) {
+        el.addEventListener(type, fn, false);
+      } else if (el.attachEvent) {
+        el.attachEvent('on' + type, function () {
+          fn.call(el);
+        });
+      } else {
+        el['on' + type] = fn;
+      }
+    }
+  </script>
+</body>
+
+</html>

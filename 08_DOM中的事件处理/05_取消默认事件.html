@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- void(0) 就是 return 0 -->
+  <!-- <a href="javascript:void(0)">百度一下</a> -->
+  <!-- <a href="javascript:;">百度一下</a> -->
+  <!-- <a href="#">百度一下</a> -->
+  <!-- <a href="#">百度一下</a> -->
+  <a href="">百度一下</a>
+
+  <form action="">
+    <input type="text" name="content" />
+    <input type="submit" id="submit" value="提交" />
+  </form>
+  <script>
+    // =>取消默认事件
+    /* 
+    document.oncontextmenu = function(){
+      var e = e || window.event;
+
+      // DOM0句柄的方式才可以使用
+      // return false;
+
+      // W3C: IE9及以下不兼容
+      // e.preventDefault();
+
+      // IE9以下
+      e.returnValue = false;
+    } 
+    */
+
+    /* 
+    var a = document.getElementsByTagName('a')[0];
+
+    a.onclick = function(e){
+      e.preventDefault();
+    } 
+    */
+
+    // 阻止表单提交刷新页面，可以异步进行操作
+    var submit = document.getElementById('submit');
+
+    submit.onclick = function (e) {
+      var e = e || window.event;
+      e.preventDefault();
+      console.log('提交了');
+    }
+  </script>
+</body>
+
+</html>

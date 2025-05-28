@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      background-color: lightskyblue;
+    }
+
+    .middle {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    .box .outer {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-color: orange;
+    }
+
+    .box .outer .inner {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="outer middle">
+      <div class="inner middle"></div>
+    </div>
+    <script>
+      var box = document.querySelector('.box'),
+        outer = document.querySelector('.outer'),
+        inner = document.querySelector('.inner');
+
+      // =>阻止事件冒泡
+      // 只输出 bobbleInner
+
+      box.addEventListener('click', function () {
+        console.log('bobbleBox');
+      }, false);
+
+      outer.addEventListener('click', function () {
+        console.log('bobbleOuter');
+      }, false);
+
+      inner.addEventListener('click', function (e) {
+        var e = e || window.event;
+        // e.stopPropagation();
+        cancelBubble(e);
+        console.log('bobbleInner');
+      }, false);
+
+      // 封装取消冒泡
+      function cancelBubble(e) {
+        var e = e || window.event;
+
+        if (e.stopPropagation) {
+          e.stopPropagation();
+        } else {
+          e.cancelBubble = true;
+        }
+      } 
+    </script>
+</body>
+
+</html>
