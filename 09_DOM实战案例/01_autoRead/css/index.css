@@ -1,0 +1,56 @@
+.bk-list .list-item {
+  position: relative;
+  height: 150px;
+  border-bottom: 1px solid #ddd;
+}
+
+.bk-list .list-item .item-lk {
+  display: block;
+  height: 100%;
+}
+
+/* 
+  两栏布局：先固定左边容器的宽高，图片高度100%，宽度自适应，右边内容高度100%
+  不用去算图片的高度
+*/
+.bk-list .list-item .bk-pic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 150px;
+  padding: 10px;
+}
+
+.bk-list .list-item .bk-info {
+  height: 100%;
+  margin-left: 118px;
+  color: #424242;
+}
+
+.bk-list .list-item .bk-info h2,
+.bk-list .list-item .bk-info p{
+  margin-top: 15px;
+}
+
+.bk-list .list-item .bk-info .intro {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #999;
+}
+
+.s-top-btn {
+  display: none;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 60px;
+  height: 60px;
+  background: url(../img/rocket.png) no-repeat 0 0/100% 100%;
+  border-radius: 50%;
+  opacity: .6;
+}
+
+.s-top-btn:hover {
+  opacity: 1;
+}
