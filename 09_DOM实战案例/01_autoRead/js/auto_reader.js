@@ -12,7 +12,7 @@
     this.playImg = opt.playImg;
     this.pauseImg = opt.pauseImg;
 
-    if(!this.playBtn || !this.sTopBtn || !this.playImg || !this.pauseImg){
+    if (!this.playBtn || !this.sTopBtn || !this.playImg || !this.pauseImg) {
       console.log('对不起，4个配置项必须全部配置');
       return;
     }
@@ -48,7 +48,7 @@
           var sTop = Math.round(getScrollOffset().top);
 
           // 滚动到底部
-          console.log(sHeight + 44,wHeight, sTop)
+          console.log(sHeight + 44, wHeight, sTop)
           if (sHeight + 44 === wHeight + sTop) {
             clearInterval(t);
             _self.playBtn.style.backgroundImage = _self.playImg;
