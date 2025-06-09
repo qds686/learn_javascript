@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      position: absolute;
+      top: 200px;
+      left: 200px;
+      width: 100px;
+      height: 100px;
+      background-color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+
+  <script src="js/utils.js"></script>
+  <script>
+    var box = document.getElementsByClassName('box')[0],
+      x,
+      y;
+
+    // 点击的位置为拖拽的位置
+    document.onmousedown = function (e) {
+      var e = e || window.event;
+
+      // 每次移动的时候，要知道盒子的左顶点坐标
+      // 1.只有鼠标在盒子中的位置为固定的，首先计算出鼠标在盒子中的位置
+      // 2.在移动的过程中，只需要鼠标的位置减去在盒子中的位置即可
+      x = pagePos(e).X - getStyles(box, 'left');
+      y = pagePos(e).Y - getStyles(box, 'top');
+
+      document.onmousemove = function (e) {
+        var e = e || window.event;
+
+        box.style.left = pagePos(e).X - x + 'px';
+        box.style.top = pagePos(e).Y - y + 'px';
+      }
+
+      // 在document上抬起鼠标，避免鼠标移动过快，脱离盒子
+      document.onmouseup = function (e) {
+        this.onmousemove = null;
+        this.onmouseup = null;
+      }
+    } 
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    function getScrollOffset() {
+      if (window.pageXOffset) {
+        return {
+          left: window.pageXOffset,
+          top: window.pageYOffset
+        }
+      } else {
+        return {
+          left: document.body.scrollLeft + document.documentElement.scrollLeft,
+          top: document.body.scrollTop + document.documentElement.scrollTop
+        }
+      }
+    }
+
+    function pagePos(e) {
+      var sLeft = getScrollOffset().left,
+        sTop = getScrollOffset().top,
+        cLeft = document.documentElement.clientLeft || 0,
+        cTop = document.documentElement.clientTop || 0;
+
+      return {
+        X: e.clientX + sLeft - cLeft,
+        Y: e.clientY + sTop - cTop
+      };
+    }
+
+    // 使用
+    document.onclick = function (e) {
+      var e = e || window.event;
+
+      console.log(e.pageY, pagePos(e).Y);
+    }
+  </script>
+</body>
+
+</html>

@@ -20,18 +20,12 @@ var initTodoList = (function () {
   // 点击“+”实现inputWrap的显示和隐藏，用标记inputShow判断
   addEvent(showInput, 'click', function () {
     if (inputShow) {
-      inputWrap.style.display = 'none';
-      inputShow = false;
+      inputWrapShow('close');
 
       // 点击编辑按钮后再点击加号要恢复
-      isEdit = false;
-      curIdx = null;
-      textInput.value = '';
-      addItem.innerHTML = '增加项目';
-      return;
+      restoreStatus();
     } else {
-      inputWrap.style.display = 'block';
-      inputShow = true;
+      inputWrapShow('open');
     }
   });
 
@@ -49,15 +43,16 @@ var initTodoList = (function () {
     if (contentLen <= 0) return;
 
     // 添加LI的时候先循环LI去重
-    for (var i = 0; i < itemLen; i++) {
-      itemText = elemChildren(oItems[i])[0].innerText;
+    if (itemLen > 0) {
+      for (var i = 0; i < itemLen; i++) {
+        itemText = elemChildren(oItems[i])[0].innerText;
 
-      if (itemText === content) {
-        alert('此项目已经存在！');
-        textInput.value = '';
-        inputWrap.style.display = 'none';
-        inputShow = false;
-        return;
+        if (itemText === content) {
+          alert('此项目已经存在！');
+          textInput.value = '';
+          inputWrapShow('close');
+          return;
+        }
       }
     }
 
@@ -65,9 +60,6 @@ var initTodoList = (function () {
     if (isEdit) {
       var itemP = elemChildren(oItems[curIdx])[0];
       itemP.innerText = content;
-      addItem.innerHTML = '增加项目';
-      isEdit = false;
-      curIdx = null;
     } else {
       // 创建LI并且添加到ul中
       var oLi = document.createElement('li');
@@ -75,9 +67,9 @@ var initTodoList = (function () {
       oLi.innerHTML = itemTpl(content);
       oList.appendChild(oLi);
     }
-    textInput.value = '';
-    inputWrap.style.display = 'none';
-    inputShow = false;
+    restoreStatus();
+
+    inputWrapShow('close');
   });
 
   // 给ul添加事件代理
@@ -85,33 +77,55 @@ var initTodoList = (function () {
     var e = e || window.event,
       tar = e.target || e.srcElement,
       tarName = tar.className,
-      oItems = document.getElementsByClassName('item');
+      oItems = document.getElementsByClassName('item'),
+      oParent = elemParent(tar, 2),
+      tarIdx = Array.prototype.indexOf.call(oItems, oParent),
+      itemLen = oItems.length,
+      item;
 
     if (tarName === 'edit-btn fa fa-edit') {
-      var itemLen = oItems.length,
-        liParent = elemParent(tar, 2),
-        tarIdx = Array.prototype.indexOf.call(oItems, liParent),
-        item;
 
       // 1.点击编辑，首先让inputWrap显示
-      inputWrap.style.display = 'block';
-      inputShow = true;
+      inputWrapShow('open');
 
       // 2.点击一项背景变为active类，把当前项的内容显示到input中，改变增加项目的内容
       for (var i = 0; i < itemLen; i++) {
         item = oItems[i];
         item.className = 'item';
       }
-      liParent.className += ' active';
+      oParent.className += ' active';
+
+      // 3.让li中p的innerText显示到input中
+      textInput.value = elemChildren(oParent)[0].innerText;
+
+      // 4.修改增加项目
       curIdx = tarIdx;
-      textInput.value = elemChildren(liParent)[0].innerText;
       addItem.innerHTML = `编辑第${curIdx + 1}项`;
       isEdit = true;
     } else if (tarName === 'remove-btn fa fa-times') {
-      // 把这个节点删除
-      liParent.remove();
+      // 把这个节点删除，关闭inputWrap，初始化数据
+      oParent.remove();
+      inputWrapShow('close');
+      restoreStatus();
     }
   });
+
+  function inputWrapShow(action) {
+    if (action === 'open') {
+      inputWrap.style.display = 'block';
+      inputShow = true;
+    } else if (action === 'close') {
+      inputWrap.style.display = 'none';
+      inputShow = false;
+    }
+  }
+
+  function restoreStatus() {
+    isEdit = false;
+    curIdx = null;
+    textInput.value = '';
+    addItem.innerHTML = '增加项目';
+  }
 
   function itemTpl(text) {
     return (

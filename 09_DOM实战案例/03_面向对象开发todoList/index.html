@@ -4,14 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>模块化开发todoList</title>
+  <title>面向对象开发todoList</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="css/common.css" />
   <link rel="stylesheet" href="css/index.css" />
 </head>
 
 <body>
-  <div class="wrap">
+  <div class="wrap" data-config='{
+    "plusBtn": "j-show-input",
+    "inputArea": "input-wrap",
+    "addBtn": "j-add-item",
+    "list": "j-list",
+    "itemClass": "item"
+  }'>
     <div class="list-hd">
       <h2>TodoList</h2>
       <a href="javascript:;" class="j-show-input fa fa-plus"></a>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      position: absolute;
+      left: 200px;
+      top: 200px;
+      width: 100px;
+      height: 100px;
+      background-color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+
+  <script src="js/utils.js"></script>
+  <script>
+    var box = document.getElementsByClassName('box')[0];
+    elemDrag(box);
+
+    function elemDrag(elem) {
+      var x,
+        y;
+
+      addEvent(elem, 'mousedown', function (e) {
+        var e = e || window.event;
+
+        x = pagePos(e).X - getStyles(elem, 'left');
+        y = pagePos(e).Y - getStyles(elem, 'top');
+
+        addEvent(document, 'mousemove', mouseMove);
+        addEvent(document, 'mouseup', mouseUp);
+        cancelBubble(e);
+        preventDefaultEvent(e);
+      });
+
+      function mouseMove(e) {
+        var e = e || window.event;
+
+        elem.style.left = pagePos(e).X - x + 'px';
+        elem.style.top = pagePos(e).Y - y + 'px';
+      }
+
+      function mouseUp(e) {
+        var e = e || window.event;
+        removeEvent(document, 'mousemove', mouseMove);
+        removeEvent(document, 'mouseup', mouseUp);
+      }
+    }
+  </script>
+</body>
+
+</html>

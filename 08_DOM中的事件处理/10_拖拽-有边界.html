@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .box {
+      position: absolute;
+      left: 200px;
+      top: 200px;
+      width: 100px;
+      height: 100px;
+      background-color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+  <script src="js/utils.js"></script>
+  <script>
+    var box = document.getElementsByClassName('box')[0];
+
+    elemDrag(box);
+    function elemDrag(elem) {
+      var x,
+        y,
+        minL = 0,
+        minT = 0,
+        maxL = getViewportSize().width - elem.offsetWidth,
+        maxT = getViewportSize().height - elem.offsetHeight;
+
+      addEvent(elem, 'mousedown', function (e) {
+        var e = e || window.event;
+
+        // 获取鼠标在盒子中的距离
+        x = pagePos(e).X - getStyles(elem, 'left');
+        y = pagePos(e).Y - getStyles(elem, 'top');
+
+        addEvent(document, 'mousemove', mouseMove);
+        addEvent(document, 'mouseup', mouseUp);
+        cancelBubble(e);
+        preventDefaultEvent(e);
+      });
+
+      function mouseMove(e) {
+        var e = e || window.event,
+          // 获取top left值
+          curL = pagePos(e).X - x,
+          curT = pagePos(e).Y - y;
+
+        curL = curL < minL ? minL : (curL > maxL ? maxL : curL);
+        curT = curT < minT ? minT : (curT > maxT ? maxT : curT);
+
+        elem.style.left = curL + 'px';
+        elem.style.top = curT + 'px';
+      }
+
+      function mouseUp(e) {
+        var e = e || window.event;
+
+        removeEvent(document, 'mousemove', mouseMove);
+        removeEvent(document, 'mouseup', mouseUp);
+      }
+    }
+  </script>
+</body>
+
+</html>
