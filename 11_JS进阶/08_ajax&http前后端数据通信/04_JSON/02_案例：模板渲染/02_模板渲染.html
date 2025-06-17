@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <!-- 大盒子占满整个body -->
+  <div class="cover">
+    <!-- 1200 -->
+    <div class="student-album">
+      <div class="album-title">
+        <h1>踏实勤奋努力 注定技术到手</h1>
+        <p>中大型互联网企业需要真正有技术的人</p>
+      </div>
+      <div class="album-wrap">
+        <ul class="list j-list clearfix"></ul>
+      </div>
+    </div>
+  </div>
+   <!-- 
+      缓存数据：第一次使用提前保存在HTML中的服务器数据，缓解服务器的http请求次数
+      以后每一次请求数据都往这个标签中添加，获取的时候首先查看这个里面缓存了没有，有了直接取，没有再进行数据请求
+    -->
+  <div id="J_data" style="display: none;">
+    [{"id":"1","career":"\u524d\u7aef\u5de5\u7a0b\u5e08","city":"\u5317\u4eac","salary":"15","img":"1.jpg"},
+    {"id":"2","career":"\u524d\u7aef\u5de5\u7a0b\u5e08","city":"\u5e7f\u5dde","salary":"11","img":"2.jpg"},
+    {"id":"3","career":"\u524d\u7aef\u5de5\u7a0b\u5e08","city":"\u4e0a\u6d77","salary":"10","img":"3.jpg"},
+    {"id":"4","career":"\u524d\u7aef\u5de5\u7a0b\u5e08","city":"\u6210\u90fd","salary":"9","img":"4.jpg"},
+    {"id":"5","career":"\u540e\u7aef\u5de5\u7a0b\u5e08","city":"\u5317\u4eac","salary":"11","img":"5.jpg"},
+    {"id":"6","career":"\u524d\u7aef\u5de5\u7a0b\u5e08","city":"\u5317\u4eac","salary":"13","img":"6.jpg"},
+    {"id":"7","career":"\u524d\u7aef\u5de5\u7a0b\u5e08","city":"\u6df1\u5733","salary":"12","img":"7.jpg"},
+    {"id":"8","career":"\u524d\u7aef\u5de5\u7a0b\u5e08","city":"\u4e0a\u6d77","salary":"10","img":"8.jpg"},
+    {"id":"9","career":"\u540e\u7aef\u5de5\u7a0b\u5e08","city":"\u6210\u90fd","salary":"10","img":"9.jpg"},
+    {"id":"10","career":"\u524d\u7aef\u5de5\u7a0b\u5e08","city":"\u5317\u4eac","salary":"18","img":"10.jpg"}]
+  </div>
+  <!-- 模板渲染 -->
+  <script type="text/tpl" id="J_tpl">
+    <li class="list-item">
+      <div class="mask">
+        <h3>{{career}}({{city}})</h3>
+        <p>月薪{{salary}}K</p>
+      </div>
+      <img src="img/{{img}}" alt="" />
+    </li>
+  </script>
+  <script type="text/javascript" src="js/02_模板渲染.js"></script>
+</body>
+
+</html>

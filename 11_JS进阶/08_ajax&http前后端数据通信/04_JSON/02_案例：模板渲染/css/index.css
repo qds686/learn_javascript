@@ -1,0 +1,121 @@
+body {
+  margin: 0;
+  color: #3c3c3c;
+  /* 去字体的锯齿 */
+  -webkit-font-smoothing: antialiased;
+  font: 12px/1.5 tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li {
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+ul,
+li,
+div {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.cover {
+  min-width: 1200px;
+}
+
+.student-album {
+  width: 1200px;
+  margin: 80px auto;
+}
+
+.student-album .album-title {
+  height: 100px;
+  text-align: center;
+}
+
+.student-album .album-title h1 {
+  position: relative;
+  height: 65px;
+  font-size: 35px;
+  color: #000;
+  font-family: 'fzzzh'
+}
+
+.student-album .album-title h1::before,
+.student-album .album-title h1::after {
+  position: absolute;
+  top: 25px;
+  content: "";
+  width: 50px;
+  height: 2px;
+  background-color: #000;
+}
+
+.student-album .album-title h1::before {
+  left: 310px;
+}
+
+.student-album .album-title h1::after {
+  right: 310px;
+}
+
+.student-album .album-title p {
+  font-size: 20px;
+}
+
+.student-album .list-item {
+  float: left;
+  position: relative;
+  width: 216px;
+  height: 216px;
+  margin: 30px 30px 0 0;
+  border-radius: 50%;
+  text-align: center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
+  overflow: hidden;
+}
+
+.student-album .list-item:nth-child(5n){
+  margin: 30px 0 0;
+}
+
+.student-album .list-item .mask {
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .6);
+  color: #fff;
+  transition: bottom .2s ease-in-out;
+}
+
+.student-album .list-item:hover .mask {
+  bottom: 0;
+}

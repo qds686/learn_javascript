@@ -499,6 +499,24 @@
     });
   };
 
+  /**
+   * 模板替换函数
+   * @param {node} tpl 节点中包含要替换的HTML
+   * @param {*} regTpl 正则 捕获node和key
+   * @param {*} opt opt[key]
+   * @returns 需要添加到HTML中的字符串
+   */
+  function setTplToHTML(tpl, regTpl, opt) {
+    return tpl.replace(regTpl(), function (node, key) {
+      return opt[key];
+    });
+  }
+
+  // 匹配{{xxx}}
+  function regTpl() {
+    return new RegExp(/{{(.*?)}}/, 'gim');
+  }
+
 
   const utils = {
     toType,
@@ -515,7 +533,9 @@
     merge,
     clone,
     storage,
-    jsonp
+    jsonp,
+    setTplToHTML,
+    regTpl
   };
 
   // 处理冲突：在Node和webpack中不存在冲突，保证导入的库定义的名字不重复即可，在浏览器中会重复

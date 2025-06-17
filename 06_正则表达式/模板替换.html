@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="box">
+    <h1>{{title}}</h1>
+    <p>{{content}}</p>
+  </div>
+
+  <script type="text/javascript">
+    var oBox = document.getElementsByClassName('box')[0],
+      tpl = oBox.innerHTML,
+      res;
+
+    res = tpl.replace(/{{(.*?)}}/g, function (node, key) {
+      return {
+        title: "我是一个测试标题",
+        content: "我是一个测试内容"
+      }[key];
+    });
+
+    oBox.innerHTML = res;
+  </script>
+</body>
+
+</html>
