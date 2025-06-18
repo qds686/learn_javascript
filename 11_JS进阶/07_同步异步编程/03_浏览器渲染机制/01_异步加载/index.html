@@ -53,6 +53,11 @@
         oScript = document.getElementsByTagName('script')[0];
       s.type = 'text/javascript';
 
+      // 兼容性：
+      // + IE只有window有onload事件，script上没有onload事件，不能用onload事件判断
+      //   + 用onreadystatechange获取readyState来判断资源是否下载完成
+      // + W3C浏览器script都有onload事件，在里面执行utils中的方法即可
+      // + onreadystatechange和onload实时监听url「utils文件路径」的下载情况，下载完成执行utils中的方法
       if (s.readyState) { // 文件返回的状态码
         s.onreadystatechange = function () {
           var state = s.readyState;
@@ -66,7 +71,7 @@
           utils[fn]();
         }
       }
-      // 放在下面，不会阻塞onLoad
+      // 放在下面，资源下载不会阻塞onLoad
       s.src = url;
       oScript.parentNode.insertBefore(s, oScript);
     }
