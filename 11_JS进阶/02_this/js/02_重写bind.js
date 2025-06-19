@@ -59,3 +59,6 @@ Function.prototype.myBind = function myBind(context, ...params) {
 // var p1 = p('男'); // {age: 18} 18 '盒子' '男' 
 
 var p = Person.myBind(p, '盒子', '男')(); // {age: 18} 18 '盒子' '男' 
+
+
+

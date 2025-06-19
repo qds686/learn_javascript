@@ -1,0 +1,20 @@
+.imageLazyBox {
+  width: 236px;
+  height: 420px;
+  margin: 1000px 0;
+  background: url("../images/default.gif") no-repeat center center #fff;
+}
+
+/* 
+  开始图片是隐藏的，在某些IE浏览器中，如果图片的src是空的，或者加载的图片是错误的，图片不隐藏，会显示一个 X 的效果，很难看，所以图片没有加载真实地址，并且加载正确之前，让图片隐藏
+    办法一：display: none; 这种方法在加载完成真实图片后，还需要让其display: block; 这样出发了DOM的回流重绘，性能消耗较大...
+    办法二：opacity: 0; 推荐这种方案，后期加载真实图片后，我们只需要设置opacity: 1;，这样不会引发DOM的回流和重绘，还可以通过CSS3动画实现出渐现的效果
+*/
+.imageLazyBox img {
+  width: 100%;
+  height: 100%;
+  
+  /* display: none; */
+  opacity: 0;
+  transition: opacity .3s;
+}

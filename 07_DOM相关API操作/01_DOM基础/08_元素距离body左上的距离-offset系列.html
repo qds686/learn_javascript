@@ -16,6 +16,7 @@
       top: 60px;
       width: 360px;
       height: 360px;
+      margin: 1000px 0;
       border: 10px solid #000;
       background-color: #ccc;
     }
@@ -76,7 +77,11 @@
         top: offsetTop
       }
     }
-    getElemDocPosition(son);//获取son相对于body的偏移
+
+    window.onscroll = function(){
+      console.log(getElemDocPosition(son).top); //获取son相对于body的偏移
+    }
+    
   </script>
 </body>
 

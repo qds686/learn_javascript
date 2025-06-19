@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="box">
+    <p class="   content  content1">
+      <span class="   content   content2"></span>
+    </p>
+    <h1 class="   content  content1"></h1>
+    <span class="  content  content1"></span>
+  </div>
+  <script>
+    var oBox = document.getElementsByClassName('box')[0];
+    // document.getElementsByClassName ||
+    Document.prototype._getElementsByClassName = Element.prototype._getElementsByClassName =  function (className) {
+      var allDoms = this.getElementsByTagName('*'),
+        allDomLen = allDoms.length,
+        allDomsItem,
+        finalDoms = [];
+   
+      for (var i = 0; i < allDomLen; i++) {
+        allDomsItem = allDoms[i];
+
+        var classArr = trimSpace(allDomsItem.className).trim().split(' '),
+          classArrLen = classArr.length,
+          classArrItem;
+
+        for (var j = 0; j < classArrLen; j++) {
+          classArrItem = classArr[j];
+
+          if (classArrItem === className) {
+            finalDoms.push(allDomsItem);
+            break;
+          }
+        }
+      }
+
+      function trimSpace(str) {
+        return str.replace(/\s+/g, ' ');
+      }
+
+      return finalDoms;
+    }
+
+    console.log(oBox._getElementsByClassName('content'));
+    console.log(document._getElementsByClassName('content'));
+
+  </script>
+</body>
+
+</html>
