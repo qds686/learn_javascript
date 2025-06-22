@@ -7,12 +7,17 @@
   var init = function () {
     oImgList.innerHTML = renderList(data);
     bindEvent();
+    // 每次刷新页面，跳转到首屏
+    setTimeout(function () {
+      win.scrollTo(0, 0);
+    }, 150);
   }
 
   function bindEvent() {
-    win.onscroll = function () {
+    win.onload = win.onscroll = _.throttle(function () {
+      // 节流onscroll
       imgLazyLoad(oImgs)();
-    }
+    });
   }
 
   function renderList(data) {
@@ -42,8 +47,9 @@
       for (var i = 0; i < imgLen; i++) {
         imgItem = images[i];
 
-        var A = _.getElemDocPosition(imgItem).top + imgItem.offsetHeight,
-          B = cHeight + sTop;
+        // 基于getBoundingClientRect来判断图片加载的条件，不用自己写元素到BODY的上偏移的方法
+        var A = imgItem.getBoundingClientRect().bottom,
+          B = HTML.clientHeight;
 
         if (!imgItem.loaded && A <= B) {
           imgItem.onload = function () {
@@ -59,4 +65,3 @@
 
   init();
 })(window, document);
-

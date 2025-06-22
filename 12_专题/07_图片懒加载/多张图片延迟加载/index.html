@@ -24,13 +24,12 @@
     .img-list .img-item {
       float: left;
       width: 236px;
-      margin-right: 5px;
-      background: url(images/default.gif) no-repeat center center #eee;
+      margin: 5px;
+      background: url(images/default.png) no-repeat center center;
     }
 
     .img-list .img-item img {
       width: 100%;
-
       opacity: 0;
       transition: opacity .3s;
     }
@@ -45,7 +44,6 @@
   <div class="wrap">
     <ul class="img-list J_imgList clearFix"></ul>
   </div>
-  <!-- <img border="0" src="images/default.gif" data-src="images/1.jpg" alt=""> -->
 
   <div class="J_data" style="display: none;">
     [{
@@ -411,15 +409,15 @@
   <script type="text/html" id="J_imgTpl">
     <li class="img-item">
       <div class="img-wrap">
-        <img src="images/default.gif" class="list-img" data-src="{{pic}}" alt="">
+        <img src="" class="list-img" data-src="{{pic}}" alt="" />
       </div>
       <div class="img-tt">
-        <h1>图片{{id}}</h1>
+        <h1>图片{{id}}</h1> 
       </div>
     </li>
   </script>
   <script type="text/javascript" src="js/utils.js"></script>
-  <script type="text/javascript" src="js/index1.js"></script>
+  <script type="text/javascript" src="js/index3.js"></script>
 </body>
 
 </html>
