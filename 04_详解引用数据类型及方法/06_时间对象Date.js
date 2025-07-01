@@ -2,6 +2,8 @@
 // 1.没有传入任何的参数，获取到当前时间
 var date1 = new Date();
 console.log(date1); // 'Tue Jul 30 2024 23:29:50 GMT+0800 (中国标准时间)'
+console.log(date()); // 'Tue Jul 30 2024 23:29:50 GMT+0800 (中国标准时间)'
+console.log(date1.toString()); // 'Tue Jul 30 2024 23:29:50 GMT+0800 (中国标准时间)'
 
 // 2.传入参数：时间字符串
 var date2 = new Date("2024-7-30");
@@ -55,7 +57,7 @@ var second = date6.getSeconds();
 console.log(year, month, day, hour, minute, second); // 2024 7 31 0 22 10
 console.log(`${year}/${month}/${day} ${hour}:${minute}:${second}`); // '2024/7/31 0:22:31'
 
-var weekday = date6.getDay() // 一周中的第几天
+var weekday = date6.getDay() // 一周中的第几天 返回0-6
 console.log(weekday) // 3
 
 // 四、获取Unix时间戳
@@ -71,7 +73,7 @@ var timestamp2 = date7.getTime();
 var timestamp3 = date8.valueOf();
 console.log(timestamp2, timestamp3); // 1722358192525 1749052800000
 
-// 五、将字符串事件转成时间戳
+// 五、将字符串时间转成时间戳
 var timeString = "04/24/2024";
 
 // 1.方式一

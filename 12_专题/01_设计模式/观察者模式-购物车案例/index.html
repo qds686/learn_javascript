@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    .container {
+      width: 1000px;
+      min-height: 500px;
+      margin: 0 auto;
+    }
+
+    .wrapper {
+      float: left;
+      width: 50%;
+      min-height: 500px;
+      border-right: 1px solid #000;
+      box-sizing: border-box;
+    }
+
+    .wrapper h1 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="wrapper">
+      <h1>课程列表</h1>
+      <ul class="J_list"></ul>
+    </div>
+    <div class="wrapper">
+      <h1>待报名课程</h1>
+      <ul class="J_cart"></ul>
+    </div>
+  </div>
+
+  <script type="module" src="./src/js/app.js"></script>
+</body>
+</html>

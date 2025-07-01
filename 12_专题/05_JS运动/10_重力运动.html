@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    .box {
+      position: absolute;
+      top: 200px;
+      height: 50px;
+      width: 50px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .box1 {
+      left: 0;
+    }
+
+    .box2 {
+      left: 50px;
+    }
+
+    .box3 {
+      left: 100px;
+    }
+
+    .box4 {
+      left: 150px;
+    }
+
+    .box5 {
+      left: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box box1"></div>
+  <div class="box box2"></div>
+  <div class="box box3"></div>
+  <div class="box box4"></div>
+  <div class="box box5"></div>
+
+  <button id="btn">开始运动</button>
+
+  <script type="text/javascript">
+    var btn = document.getElementById('btn'),
+      oBoxs = Array.from(document.getElementsByClassName('box')),
+      idx = 0;
+
+    btn.onclick = function () {
+      var t = setInterval(function () {
+        gravityMove({
+          // 运动的元素
+          obj: oBoxs[idx++],
+        });
+
+        if (idx === oBoxs.length) {
+          clearInterval(t);
+        }
+      }, 1000);
+    }
+
+    function gravityMove(json) {
+      // 运动的元素
+      var obj = json.obj,
+        // 垂直方向的top,height
+        curY = parseInt(getStyles(obj, 'top')),
+        curHeight = parseInt(getStyles(obj, 'height')),
+        // 水平方向的left width
+        curX = parseInt(getStyles(obj, 'left')),
+        curWidth = parseInt(getStyles(obj, 'width')),
+        // 最大运动高度 宽度
+        maxHeight = json.maxHeight,
+        maxWidth = json.maxWidth,
+        // 垂直方向初始步长为0
+        stepY = 0,
+        // 水平方向初始步长「匀速」
+        stepX = 5,
+        // 当前元素要设置的top left
+        top,
+        left,
+        // 减速系数
+        k = .9,
+        // 碰撞次数
+        i = 0;
+
+      maxHeight = Number(maxHeight) || getViewportSize().height;
+      maxWidth = Number(maxWidth) || getViewportSize().width;
+
+      if (obj.timer) return;
+
+      obj.timer = setInterval(function () {
+        // 垂直方向的重力加速运动
+        curY = parseInt(getStyles(obj, 'top'));
+        curX = parseInt(getStyles(obj, 'left'))
+
+        // 一定时间增加步长
+        stepY += 5;
+        top = curY + stepY;
+        left = curX + stepX;
+
+        // 垂直方向到页面的底部，做反弹处理
+        if (top > maxHeight - curHeight) {
+          // clearInterval(obj.timer);
+          top = maxHeight - curHeight;
+        }
+
+        // 水平方向到页面最右边做反弹处理
+        if (left > maxWidth - curWidth) {
+          left = maxWidth - curWidth;
+        }
+
+        // 到临界点，速度反向，同时速度减小
+        if (top === maxHeight - curHeight) {
+          i++;
+          stepY = -stepY * k;
+
+          if (i === 20) {
+            clearInterval(obj.timer);
+            obj.timer = null;
+          }
+        }
+
+        if (left === maxWidth - curWidth) {
+          stepX = -stepX;
+        }
+
+        obj.style.top = top + 'px';
+        obj.style.left = left + 'px';
+      }, 50);
+    }
+
+    function getStyles(elem, prop) {
+      if (window.getComputedStyle) {
+        if (prop) {
+          return window.getComputedStyle(elem, null)[prop];
+        } else {
+          return window.getComputedStyle(elem, null);
+        }
+      } else {
+        if (prop) {
+          return elem.currentStyle[prop];
+        } else {
+          return elem.currentStyle;
+        }
+      }
+    }
+
+    function getViewportSize() {
+      if (window.innerWidth) {// 包含滚动条
+        return {
+          width: window.innerWidth,
+          height: window.innerHeight
+        }
+      } else {// 包含滚动条
+        if (document.compatMode === 'BackCompat') {
+          return {
+            width: document.body.clientWidth,
+            height: document.body.clientHeight
+          }
+        } else {
+          return {//不包含滚动条
+            width: document.documentElement.clientWidth,
+            height: document.documentElement.clientHeight
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

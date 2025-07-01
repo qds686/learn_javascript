@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    div {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      margin-bottom: 100px;
+      border: 5px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+
+  <script type="text/javascript">
+    var oDivs = document.getElementsByTagName('div');
+
+    oDivs[0].onmouseenter = function () {
+      startmove(this, 'width', 400);
+    }
+
+    oDivs[0].onmouseleave = function () {
+      startmove(this, 'width', 100);
+    }
+
+    oDivs[1].onclick = function () {
+      startmove(this, 'opacity', 60);
+    }
+
+    oDivs[2].onclick = function () {
+      startmove(this, 'borderWidth', 10);
+    }
+
+    oDivs[3].onclick = function () {
+      startmove(this, 'height', 400);
+    }
+
+    function startmove(elem, attr, target) {
+      var iSpeed = null,
+        iCur = null;
+
+      clearInterval(elem.timer);
+
+      // 需要挂载不同的定时器，快速移入移出互不影响
+      elem.timer = setInterval(function () {
+        if (attr === 'opacity') {
+          iCur = parseFloat(getStyles(elem, attr)) * 100;
+        } else {
+          iCur = parseInt(getStyles(elem, attr));
+        }
+
+        iSpeed = (target - iCur) / 7;
+    
+        iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+        
+        // 这个条件下，border和height没有停止定时器
+        if (iCur === target ) {
+          clearInterval(elem.timer);
+        }
+
+        if (attr === 'opacity') {
+          elem.style[attr] = (iCur + iSpeed) / 100;
+        } else {
+          elem.style[attr] = iCur + iSpeed + 'px';
+        }
+      }, 30);
+    }
+
+    function getStyles(elem, prop) {
+      if (window.getComputedStyle) {
+        if (prop) {
+          return window.getComputedStyle(elem, null)[prop];
+        } else {
+          return window.getComputedStyle(elem, null);
+        }
+      } else {
+        if (prop) {
+          return elem.currentStyle[prop];
+        } else {
+          return elem.currentStyle;
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

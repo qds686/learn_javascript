@@ -87,23 +87,203 @@
   <script>
     var div = document.getElementsByTagName('div')[0];
 
-    // 实现children
-    function elemChildren(node) {
+    // 实现children：遍历一个父元素的子元素节点
+    // 两种方式：
+    // elemChildren(node) 传入节点，查找所有的元素节点  
+    // 在原型编程 Element.prototype.elemChildren，并且再传一个参数index
+    //  + 可以在找到的数组中返回第几项元素
+    Element.prototype.elemChildren = function elemChildren(index) {
       var arr = [],
         children = node.childNodes,
-        len = children.length;
+        len = children.length,
+        childItem;
+
+      /* 这里的arr也可以写成类数组的形式
+      var temp = {
+        'length': 0,
+        'push': Array.prototype.push,
+        'splice': Array.prototype.splice
+      }; 
+      */
 
       for (var i = 0; i < len; i++) {
-        var childItem = children[i];
+        childItem = children[i];
 
         if (childItem.nodeType === 1) {
           arr.push(childItem);
         }
       }
-      return arr;
+
+      if (index !== undefined && typeof (index) !== 'number') return undefined;
+
+      return index === undefined ? arr : arr[index];
     }
 
-    console.log(elemChildren(div)); // [h3,ul]
+    // console.log(elemChildren(div)); // [h3,ul]
+    console.log(div.elemChildren()); // [h3,ul]
+  </script>
+
+  <script>
+    // 在原型上写，找出一个元素的第N层父级元素
+    Element.prototype.elemParent = function (n) {
+      var type = typeof (n),
+        elem = this;
+
+      // ''和不填返回父元素
+      if (type === 'undefined' || type !== 'number') {
+        return elem.parentNode;
+      } else if (n < 0) {
+        return undefined;
+      }
+
+      while (n) {
+        if (elem.nodeName === 'HTML') {
+          elem = null;
+          return elem;
+        }
+        elem = elem.parentNode;
+        n--;
+      }
+      return elem;
+    }
+  </script>
+  <script>
+    // 是否有子元素 hasChildren 返回true、false
+    Element.prototype.hasChildren = function () {
+      var children = this.childNodes,
+        len = children.length,
+        item;
+
+      for (var i = 0; i < len; i++) {
+        item = children[i];
+
+        if (item.nodeType === 1) return true;
+      }
+      return false;
+    }
+  </script>
+  <script>
+    // 寻找兄弟元素节点，参数为正找之后，负数找之前，0找自己
+    Element.prototype.elemSibling = function (n) {
+      var elem = this;
+
+      if (n > 0) {
+        while (n) {
+          elem = elem.nextElementSibling;
+          n--;
+        }
+      } else if (n < 0) {
+        while (n) {
+          elem = elem.previousElementSibling;
+          n++;
+        }
+      }
+
+      return elem;
+    }
+    // console.log(div.elemSibling(1));
+
+    // 优化while
+    Element.prototype.elemSibling = function (n) {
+      var elem = this;
+
+      while (n) {
+        if (n > 0) {
+          elem = elem.nextElementSibling;
+          n--;
+        } else if (n < 0) {
+          elem = elem.previousElementSibling;
+          n++;
+        }
+      }
+
+      return elem;
+    }
+
+    // 优化兼容性
+    Element.prototype.elemSibling = function (n) {
+      var elem = this;
+
+      while (n) {
+        if (n > 0) {
+          if (elem.nextElementSibling) {
+            elem = elem.nextElementSibling;
+          } else {
+            // 先给elem赋值，可能有文本和注释节点
+            // elem存在 并且 如果不是元素节点，则继续进行循环赋值
+            for (elem = elem.nextSibling; elem && elem.nodeType !== 1; elem = elem.nextSibling);
+          }
+          n--;
+        } else if (n < 0) {
+          if (elem.previousElementSibling) {
+            elem = elem.previousElementSibling;
+          } else {
+            // 先给elem赋值，可能有文本和注释节点
+            // elem存在 并且 如果不是元素节点，则继续进行循环赋值
+            for (elem = elem.previousSibling; elem && elem.nodeType !== 1; elem = elem.previousSibling);
+          }
+          n++;
+        }
+      }
+
+      return elem;
+    }
+
+    // 直接使用兼容写法
+    Element.prototype.elemSibling = function (n) {
+      var elem = this;
+
+      while (n) {
+        if (n > 0) {
+          elem = elem.nextSibling;
+          while (elem && elem.nodeType !== 1) {
+            elem = elem.nextSibling;
+          }
+          n--;
+        } else if (n < 0) {
+          elem = elem.previousSibling;
+          while (elem && elem.nodeType !== 1) {
+            elem = elem.previousSibling;
+          }
+          n++;
+        }
+      }
+
+      return elem;
+    }
+  </script>
+  <script>
+    // 寻找节点下所有的子元素节点
+    function getFullChildren(node) {
+      var children = node.childNodes,
+        len = children.length,
+        item;
+
+      if (node && node.nodeType === 1) {
+        console.log(node);
+      }
+
+      for (var i = 0; i < len; i++) {
+        item = children[i];
+
+        // 如果是元素节点，进行递归
+        if (item.nodeType === 1) {
+          // 最后一个为非元素节点递归自动退出
+          getFullChildren(item);
+        }
+      }
+    }
+  </script>
+  <script>
+    // 把父元素节点下的一组兄弟元素逆序排列
+    var div = document.getElementsByClassName('div')[0],
+      children = div.childNodes,
+      len = children.length;
+
+    while (len--) {
+      // 从最后一项剪切到第一项中
+      div.appendChild(children[len]);
+    }
   </script>
 </body>
 

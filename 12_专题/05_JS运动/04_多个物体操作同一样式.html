@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    div {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      margin-bottom: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+
+  <script type="text/javascript">
+    var oDivs = document.getElementsByTagName('div'),
+      len = oDivs.length,
+      item;
+
+    for (var i = 0; i < len; i++) {
+      item = oDivs[i];
+
+      item.onmouseenter = function () {
+        startmove(this, 400);
+      }
+
+      item.onmouseleave = function () {
+        startmove(this, 100);
+      }
+    }
+
+    function startmove(elem, target) {
+      var iSpeed = null,
+        iCur = null;
+
+      clearInterval(elem.timer);
+
+      // 需要挂载不同的定时器，快速移入移出互不影响
+      elem.timer = setInterval(function () {
+        iCur = parseInt(getStyles(elem, 'width'));
+
+        iSpeed = (target - iCur) / 7;
+        
+        iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+
+        if (iCur === target) {
+          clearInterval(elem.timer);
+          return;
+        }
+        elem.style.width = iCur + iSpeed + 'px';
+      }, 30);
+    }
+
+    function getStyles(elem, prop) {
+      if (window.getComputedStyle) {
+        if (prop) {
+          return window.getComputedStyle(elem, null)[prop];
+        } else {
+          return window.getComputedStyle(elem, null);
+        }
+      } else {
+        if (prop) {
+          return elem.currentStyle[prop];
+        } else {
+          return elem.currentStyle;
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

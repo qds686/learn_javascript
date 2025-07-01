@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    .box {
+      position: absolute;
+      left: 0;
+      /* left: 600px; */
+      top: 0;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+
+    span {
+      position: absolute;
+      left: 300px;
+      top: 0;
+      width: 1px;
+      height: 100px;
+      background-color: #000;
+    }
+
+    button {
+      margin-top: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+  <span></span>
+  <button>button</button>
+
+  <script type="text/javascript">
+    var oDiv = document.getElementsByClassName('box')[0],
+      oBtn = document.getElementsByTagName('button')[0],
+      timer = null;
+
+    // 匀速运动，固定时间，固定步长，在指定300位置停止
+    oBtn.onclick = function () {
+      startmove(oDiv, 300);
+    }
+
+    function startmove(elem, target) {
+      var iSpeed = target - elem.offsetLeft > 0 ? 7 : -7;
+
+      clearInterval(timer);
+      timer = setInterval(function () {
+        // elem.offsetLeft = target 这个条件成立，当等于target的时候，清除定时器
+        // 优化1：如果到达的位置不能把步数整除，则定时器永远停不下来
+        //   + 设置 target - elem.offsetLsft < iSpeed即可，累加到相邻的点会停止，最后直接赋值到具体的位置
+        // 优化2：如果考虑方向，上面的情况是盒子在目标左侧为正值，当为负值的时候，即盒子在目标右侧，需要匀速回去
+        //   + 判断iSpeed的正负来赋值步数的正负，正向前走，负向回走，条件需要绝对值判断
+        if (Math.abs(target - elem.offsetLeft) < Math.abs(iSpeed)) {
+          clearInterval(timer);
+          elem.style.left = target + 'px';
+          return;
+        }
+        elem.style.left = elem.offsetLeft + iSpeed + 'px';
+      }, 30);
+    }
+  </script>
+</body>
+
+</html>

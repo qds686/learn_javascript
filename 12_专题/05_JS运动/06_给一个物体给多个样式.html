@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    div {
+      position: absolute;
+      left: 0;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      opacity: 1;
+    }
+
+    .top {
+      top: 200px;
+    }
+
+    .bottom {
+      top: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top"></div>
+  <div class="bottom"></div>
+
+  <script type="text/javascript">
+    var topBox = document.getElementsByClassName('top')[0],
+      bottomBox = document.getElementsByClassName('bottom')[0];
+
+    topBox.onclick = function () {
+      startmove(topBox, {
+        width: 400,
+        height: 400,
+        left: 200,
+        top: 300,
+        opacity: 50
+      }, function () {
+        startmove(bottomBox, {
+          width: 400,
+          height: 400,
+          left: 200,
+          top: 300,
+          opacity: 50
+        }, function () {
+          console.log('over');
+        });
+      });
+    }
+
+    function startmove(elem, attrObj, callback) {
+      var iSpeed = null,
+        iCur = null;
+
+      clearInterval(elem.timer);
+
+      elem.timer = setInterval(function () {
+        // 问题：当一个到达条件则清楚定时器，其他属性没有到达目标值
+        // 解决：标记false，全部到达之后true再清除定时器
+        // 刚进来全部停止，只要有一个没有循环完就为false
+        var allStop = true;
+
+        for (var attr in attrObj) {
+          if (attr === 'opacity') {
+            iCur = parseFloat(getStyles(elem, attr)) * 100;
+          } else {
+            iCur = parseInt(getStyles(elem, attr));
+          }
+
+          iSpeed = (attrObj[attr] - iCur) / 7;
+
+          iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+
+          // 这个条件下，border和height没有停止定时器
+          if (iCur !== attrObj[attr]) {
+            allStop = false;
+          }
+
+          if (attr === 'opacity') {
+            elem.style[attr] = (iCur + iSpeed) / 100;
+          } else {
+            elem.style[attr] = iCur + iSpeed + 'px';
+          }
+        }
+
+        if (allStop) {
+          clearInterval(elem.timer);
+          // 所有动画停止之后，输出over
+          typeof callback === 'function' && callback();
+        }
+      }, 30);
+    }
+
+    function getStyles(elem, prop) {
+      if (window.getComputedStyle) {
+        if (prop) {
+          return window.getComputedStyle(elem, null)[prop];
+        } else {
+          return window.getComputedStyle(elem, null);
+        }
+      } else {
+        if (prop) {
+          return elem.currentStyle[prop];
+        } else {
+          return elem.currentStyle;
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
