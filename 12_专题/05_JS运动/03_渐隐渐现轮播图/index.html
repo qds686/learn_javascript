@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+
+<body>
+  <div class="slider">
+    <ul class="slider-list J-slider-list clearfix">
+      <li class="list-item">
+        <a href="javascript:;" class="item-lk">
+          <img src="./images/1.jpg" alt="">
+        </a>
+      </li>
+      <li class="list-item">
+        <a href="javascript:;" class="item-lk">
+          <img src="./images/2.webp" alt="">
+        </a>
+      </li>
+      <li class="list-item">
+        <a href="javascript:;" class="item-lk">
+          <img src="./images/3.webp" alt="">
+        </a>
+      </li>
+      <li class="list-item">
+        <a href="javascript:;" class="item-lk">
+          <img src="./images/4.webp" alt="">
+        </a>
+      </li>
+    </ul>
+    <ul class="tab-list J-tab-list clearfix">
+      <li class="tab-item cur">
+        <div class="indicator"></div>
+      </li>
+      <li class="tab-item">
+        <div class="indicator"></div>
+      </li>
+      <li class="tab-item">
+        <div class="indicator"></div>
+      </li>
+      <li class="tab-item">
+        <div class="indicator"></div>
+      </li>
+    </ul>
+    <div class="nav">
+      <a href="javascript:;" class="btn btn-prev"></a>
+      <a href="javascript:;" class="btn btn-next"></a>
+    </div>
+  </div>
+
+  <script type="text/tpl" id="J-tpl">
+    <li class="list-item">
+      <a href="javascript:;" class="item-lk">
+        <img src="{{images}}" alt="">
+      </a>
+    </li>
+  </script>
+  <script type="text/javascript" src="js/index.js"></script>
+</body>
+
+</html>

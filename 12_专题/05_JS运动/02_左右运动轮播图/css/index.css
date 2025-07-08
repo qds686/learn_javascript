@@ -1,0 +1,113 @@
+html, body{
+  margin: 0;
+  overflow-x: hidden;
+}
+
+ul,li{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+a {
+  color: #fff;
+}
+
+div, ul, li {
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+/* 轮播区域 */
+.slider {
+  position: relative;
+  width: 1200px;
+  height: 450px;
+  margin: 100px auto;
+  overflow: hidden;
+}
+
+/* 5个图片的宽度 */
+.slider .slider-list{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6000px;
+  height: 100%;
+
+  transition: left .3s linear 0s;
+}
+
+.slider .tab-list{
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  width: 160px;
+  height: 30px;
+  margin-left: -80px;
+  background-color: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.slider .list-item {
+  float: left;
+  width: 1200px;
+  height: 100%;
+}
+
+.slider .tab-item{
+  float: left;
+  width: 40px;
+  height: 100%;
+}
+
+.slider .tab-item .indicator{
+  width: 10px;
+  height: 10px;
+  background-color: #ddd;
+  margin: 10px 0 10px 15px;
+  border-radius: 50%;
+}
+
+.slider .tab-item.cur .indicator{
+  background-color: #73c5f4;
+} 
+
+.slider .btn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 41px;
+  height: 69px;
+  background: url(../images/icon-slides.png) no-repeat;
+  margin: auto;
+}
+
+.slider .nav .btn.btn-prev {
+  left: 0;
+  background-position: -84px 50%;
+}
+
+.slider .nav .btn.btn-prev:hover {
+  background-position:  0 50%;
+}
+
+.slider .nav .btn.btn-next {
+  right: 0;
+  background-position: -125px 50%;
+}
+
+.slider .nav .btn.btn-next:hover{
+  background-position: -42px 50%;
+}
