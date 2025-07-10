@@ -12,27 +12,57 @@
 <body>
 
   <div class="box" id="computedBox">
-    <ul class="list">
-      <li class="list-item">
-        <i class="minus"></i>
-        <em class="pronum">0</em>
-        <i class="plus"></i>
-        <span class="info">
-          单价：<strong>12.5元 &nbsp;</strong>
-          小计：<strong>0元</strong>
-        </span>
-      </li>
-    </ul>
-
-    <div class="bottom">
-      商品共合计：<span class="pronum">0</span> 件，
-      共花费了：<span class="pronum">0</span> 元
-      <br>
-      其中最贵的商品单价是：<span class="pronum">0</span> 元
-    </div>
+    <ul class="list"></ul>
+    <div class="bottom"></div>
+  </div>
+  <div class="J_data" style="display: none;">
+    [
+    {
+    "id": 1,
+    "count": 1,
+    "price": 12.5
+    },
+    {
+    "id": 2,
+    "count": 1,
+    "price": 10.5
+    },
+    {
+    "id": 3,
+    "count": 0,
+    "price": 8.5
+    },
+    {
+    "id": 4,
+    "count": 0,
+    "price": 8
+    },
+    {
+    "id": 5,
+    "count": 0,
+    "price": 14.5
+    }
+    ]
   </div>
 
-  <script src="./index.js"></script>
+  <script type="text/tpl" id="J_tpl">
+    <li class="list-item" data-id="{{id}}">
+      <i class="minus"></i>
+      <em class="pronum">{{count}}</em>
+      <i class="plus"></i>
+      <span class="info">
+        单价：<strong>{{price}}元 &nbsp;</strong>
+        小计：<strong>{{subtotal}}元</strong>
+      </span>
+    </li>
+  </script>
+  <script type="text/tpl" id="J_totalTpl">
+      商品共合计：<span class="pronum">{{counts}}</span> 件，
+      共花费了：<span class="pronum">{{prices}}</span> 元
+      <br>
+      其中最贵的商品单价是：<span class="pronum">{{maxPrice}}</span> 元
+  </script>
+  <script type="text/javascript" src="./index.js"></script>
 </body>
 
 </html>
