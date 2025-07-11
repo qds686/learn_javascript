@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 
+    jQuery：JS的一个类库「方法库：包含了大量的，有助于项目开发的属性和方法」
+      第一代版本1.xx：1.11.3，兼容所有浏览器的「包含IE6-8」
+      -> 没有Vue、React、angular等框架之前「数据驱动」，项目都是基于操作DOM完成的，基本上项目中都是使用JQ来完成的
+
+      第二代版本2.xx：放弃了低版本浏览器的兼容处理，迎合了一些移动端的开发处理「同时诞生一个比JQ更懂移动端的类库Zepto，所以第二代版本是一个鸡肋」
+
+      第三代版本3.xx：没有处理低版本浏览器的兼容，但是此时项目进入到框架开发时代，传统操作DOM的思想逐步被摒弃，所以JQ已经没有落下来了
+    =============
+    1.选择器：获取需要操作的元素「JQ对象->类数组集合」
+      ->只有JQ对象才可以调用JQ提供的一些操作DOM的方法
+    2.操作DOM的方法
+      A:筛选方法 
+        children/find/filter/eq(get)/prev/prevAll/next/nextAll/siblings/index...
+      B:操作样式 
+        css/addClass/removeClass/toggleClass/hasClass
+        width/height/innerWidth/innerHeight(clientHeight)/outerWidth/outerHeight(offsetHeight)/offset...
+      C:操作内容
+        html/text/val/append/appendTo/insertAfter/insertBefore/attr...
+      D:控制动画
+        animate/stop/finish/fadeIn/fadeOut/fadeToggle/hidde/show/slideDown/slideUp/slideToggle...
+      E:控制事件绑定
+        on/off/bind/unbind/delgate/one...
+    3.工具类方法
+      each/ajax...
+    ===================
+    1.eq获取到的是JQ对象，get获取到的是原生DOM对象
+    2.$(DOM对象)：把DOM对象变为JQ对象
+    3.$(`<div>哈哈</div>`)：动态创建一个新的DOM结构
+    4.$(function(){})：等到所有DOM结构加载完成，才会触发这个回调函数执行，等价于$(document).ready(function(){})
+    5.事件绑定：elem.on('click', fn) => elem.onclick = function(){}
+    6.JQ中有一个内置循环机制：给一个JQ对象集合直接的事件绑定或者修改样式等，则JQ内部会默认帮助我们做循环处理，分别会给集合中的每一项都做处理。。。
+    $tabList.mouseenter(function(){
+      this就是当前操作的这一项(原生DOM对象)
+      index() 获取当前项的索引(在其兄弟中的排名)
+      siblings：获取所有的兄弟
+    });
+    7.JQ方法获取的元素集合(类数组集合)可以使用sort，因为JQ帮助我们实现了和数组相同 的sort方法
+  -->
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+</body>
+</html>

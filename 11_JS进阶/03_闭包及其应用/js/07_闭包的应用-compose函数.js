@@ -2,7 +2,7 @@ const add1 = x => x + 1;
 const mul3 = x => x * 3;
 const div2 = x => x / 2;
 
-/* 
+
 // 常规操作
 const compose = (...funcs) => {
   // EC(Compose)闭包：func=[div2, mul3, add1, add1]
@@ -10,7 +10,7 @@ const compose = (...funcs) => {
   // funcs中一项都没有，operate传的啥就输出啥
   if (len === 0) return x => x;
   // if (len === 1) return x => funcs[0](x);
-  // 如果只有一项，则返回这个函数，最后执行的时候传递x即可
+  // 如果只有一项，则返回这个函数，operate就是这个函数了，最后执行的时候传递x即可
   if (len === 1) return funcs[0];
 
   const operate = x => {
@@ -25,7 +25,7 @@ const compose = (...funcs) => {
 const operate = compose(div2, mul3, add1, add1);
 console.log(operate(0)); // 3
 console.log(operate(2)); // 6
-*/
+
 
 // redux源码中的：用redux构建模型，执行的时候反推回来
 const compose = function compose(...funcs) {
