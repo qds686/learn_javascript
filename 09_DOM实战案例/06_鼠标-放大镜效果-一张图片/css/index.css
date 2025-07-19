@@ -1,0 +1,45 @@
+.img-wrap {
+  position: relative;
+  width: 375px;
+  height: 500px;
+  margin: 100px auto;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px #999;
+}
+
+/* 相对于大图可以移动的固定大小的小图 */
+.img-wrap .mag-wrap { 
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 200px;
+  background-color: #fff;
+  box-shadow: 0 0 3px #ccc;
+  overflow: hidden;
+}
+
+.img-wrap .mag-wrap.show {
+  display: block;
+  transform: scale(1.5);
+}
+
+/* 保证小图的img是和大图一样大，在移动的过程中对小图放大 */
+.img-wrap .mag-wrap .mag-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 500px;
+} 
+
+.img-wrap .img-lk {
+  display: block;
+  height: 100%;
+}
+
+.img-wrap .static-img{
+  width: 100%;
+  height: 100%;
+}

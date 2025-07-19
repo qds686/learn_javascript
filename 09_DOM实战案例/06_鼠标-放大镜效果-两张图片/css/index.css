@@ -1,0 +1,60 @@
+.img-wrap {
+  position: relative;
+  /* width: 375px; */
+  width: 525px;
+  height: 500px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 100px auto;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px #999;
+}
+
+.img-wrap .mag-wrap { 
+  width: 150px;
+  height: 200px;
+  background-color: #fff;
+  box-shadow: 0 0 3px #ccc;
+  overflow: hidden;
+}
+
+.img-wrap .mag-wrap .mag-img {
+  width: 100%;
+  height: 100%;
+} 
+
+/* 
+进入左边才显示 
+移动Mark控制右边图片移动
+*/
+.img-wrap .mag-wrap .mark{
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 80px;
+  height: 106px;
+  background: rgba(255, 0, 0, .3);
+  cursor: move;
+}
+
+/* 
+Mark显示则大图也显示
+大图固定宽高，超出隐藏 
+*/
+.img-wrap .img-lk {
+  display: none;
+  position: relative;
+  width: 375px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.img-wrap .static-img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}

@@ -1,0 +1,176 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+img {
+  width: 100%;
+}
+
+h4 {
+  font-weight: normal;
+}
+
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.courses-wrap {
+  width: 1200px;
+  margin: 100px auto;
+}
+
+.courses-wrap .search-input{
+  height: 50px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  font-size: 16px;
+  border: 1px solid #eee;
+}
+
+.courses-wrap .course-tab {
+  height: 52px;
+  padding-left: 30px;
+  margin-bottom: 20px;
+  border: 1px solid #efefef;
+  background-color: #f5f5f5;
+}
+
+.course-tab .tab-item {
+  float: left;
+  height: 50px;
+  margin-right: 40px;
+  line-height: 50px;
+}
+
+.course-tab .course-tab-lk {
+  font-size: 14px;
+}
+
+.course-tab .course-tab-lk.current {
+  color: #167ed9;
+}
+
+/* ulw > wrapw */
+.course-card-list-wrap {
+  width: 1200px;
+  height: 500px;
+}
+
+.course-card-list-wrap .course-card-list {
+  width: 1230px;
+  height: 500px;
+  margin-left: -15px;
+}
+
+.course-card-list-wrap .course-card-list .course-list-tip {
+  height: 300px;
+  line-height: 300px;
+  text-align: center;
+  font-size: 30px;
+  color: #999;
+}
+
+/* itemw>aw */
+.course-card-list-wrap .card-item {
+  float: left;
+  width: 236px;
+  height: 221px;
+  margin: 0 0 20px 9px;
+  padding: 7px 7px 10px 7px;
+  /* 占位 */
+  border: 1px solid #fff;
+}
+
+.course-card-list-wrap .card-item:hover {
+  border-color: #ddd;
+  box-shadow: 1px 1px 2px 1px #ececec;
+}
+
+.course-card-list-wrap .card-item .img-lk {
+  display: block;
+  width: 220px;
+  height: 124px;
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+
+.course-card-list-wrap .card-item .item-status {
+  position: relative;
+  z-index: 1;
+  width: 220px;
+  height: 24px;
+  margin-top: -30px;
+  line-height: 22px;
+  background-color: rgba(0, 0, 0, .5);
+  color: #fff;
+}
+
+.course-card-list-wrap .card-item .item-status .item-status-text {
+  margin-left: 2px;
+  font-size: 12px;
+}
+
+.course-card-list-wrap .card-item .item-tt {
+  height: 40px;
+  margin: 3px 0 8px 0;
+  /* 多行文本省略号效果，弹性盒子垂直居中，最多显示两行，超出显示省略号 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;  /* Safari */
+  display: -moz-box;     /* Firefox */
+  display: -ms-box;      /* IE */
+  display: box;          /* 标准 */
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 2;
+  -moz-line-clamp: 2;
+  -ms-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.course-card-list-wrap .card-item .item-tt .tt-lk {
+  font-size: 14px;
+}
+
+.course-card-list-wrap .card-item .item-tt .tt-lk:hover{
+  color: #23b8ff;
+}
+
+.course-card-list-wrap .card-item .item-line{
+  height: 24px;
+}
+
+.course-card-list-wrap .card-item .item-line .item-price{
+  font-size: 14px;
+}
+
+.course-card-list-wrap .card-item .item-line .item-price.free{
+  color: #5fb41b;
+}
+
+.course-card-list-wrap .card-item .item-line .item-price.vip {
+  color: #e85308;
+}
+
+.course-card-list-wrap .card-item .item-line .item-info{
+  float: right;
+  margin-top: 3px;
+  font-style: 12px;
+  color: #999;
+}
