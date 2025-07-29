@@ -43,6 +43,42 @@ submit.onclick = function () {
 }
 */
 
+function debounce(fn, wait, immediate){
+  var t = null;
+
+  return function () {
+    var _self = this,
+      args = arguments;
+
+    // 刚开始进来不管是第一次触发还是不是第一次触发都清除定时器
+    // 但是定时器T的ID没有清除，是数字
+    if(t) {
+      clearTimeout(t);
+    }
+
+    // 如果是第一次触发，immediate=true
+    if(immediate){
+      // 此时 !数字=false，不能执行函数
+      var now = !t;
+
+      // 对第一次进行延迟，在wait时间内，函数不会执行
+      // 只有到时间 now = !null = true，函数才会执行
+      t = setTimeout(function(){
+        t = null;
+      }, wait);
+
+      if(now){
+        fn.apply(_self, args);
+      }
+    } else {
+      // 首次触发之后，在wait时间内是否有第二次触发，有则重新设置定时器，没有到时间执行函数即可
+      t = setTimeout(function(){
+        fn.apply(_self, args);
+      }, wait);
+    }
+  }
+}
+
 const submit = document.querySelector('#submit');
 
 const func = function func(ev) {

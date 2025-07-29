@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    Function.prototype.unCurring = function () {
+      var self = this;
+      return function () {
+        // 取出第一项，obj = {}，arguments剩余两项
+        var obj = Array.prototype.shift.call(arguments);
+        // self->Array.prototype.push
+        // Array.prototype.push.apply(obj, arguments); 
+        // 即给obj对象中push实参集合arguments
+        return self.apply(obj, arguments);
+      };
+    };
+    var push = Array.prototype.push.unCurring(),
+      obj = {};
+    push(obj, "first", "two");
+    // console.log(obj); // {0: "first", 1: "two", length: 2}
+  </script>
+  <script>
+    function curry(fn, len) {
+      var len = len || fn.length;
+
+      var func = function (fn) {
+        var _arg = [].slice.call(arguments, 1);
+        console.log(_arg)
+        return function () {
+          var newArgs = _arg.concat([].slice.call(arguments));
+          console.log(newArgs);
+          return fn.apply(this, newArgs);
+        }
+      }
+
+      return function () {
+        var argLen = arguments.length;
+
+        if (argLen < len) {
+          var formatedArr = [fn].concat([].slice.call(arguments));
+          return curry(func.apply(this, formatedArr), len - argLen);
+        } else {
+          return fn.apply(this, arguments);
+        }
+      }
+    }
+
+    function add(a, b, c, d) {
+      return a + b + c + d;
+    }
+
+    var add2 = curry(add);
+    var res = add2(1)(2)(3)(4);
+    console.log(res);
+  </script>
+  <script>
+    // 偏函数
+    Function.prototype.partial = function () {
+      var _self = this,
+        _args = [].slice.call(arguments);
+
+      return function () {
+        var newArgs = _args.concat([].slice.call(arguments));
+        return _self.apply(this, newArgs);
+      }
+    }
+
+    
+  </script>
+</body>
+
+</html>

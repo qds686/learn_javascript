@@ -1,0 +1,47 @@
+{
+  "testSuite": "BackstopJS",
+  "tests": [
+    {
+      "pair": {
+        "reference": "../../../backstop_data/bitmaps_reference/qq_map_0_document_0_iphone.png",
+        "test": "../../../backstop_data/bitmaps_test/20201022-210256/qq_map_0_document_0_iphone.png",
+        "selector": "document",
+        "fileName": "qq_map_0_document_0_iphone.png",
+        "label": "map",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "https://map.qq.com/m/",
+        "referenceUrl": "",
+        "expect": 0,
+        "viewportLabel": "iphone",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "../../../backstop_data/bitmaps_reference/qq_map_0_document_1_tablet.png",
+        "test": "../../../backstop_data/bitmaps_test/20201022-210256/qq_map_0_document_1_tablet.png",
+        "selector": "document",
+        "fileName": "qq_map_0_document_1_tablet.png",
+        "label": "map",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "https://map.qq.com/m/",
+        "referenceUrl": "",
+        "expect": 0,
+        "viewportLabel": "tablet",
+        "error": "Reference file not found /Users/yuanzhijia/Desktop/yd-tests/backstop_data/bitmaps_reference/qq_map_0_document_1_tablet.png"
+      },
+      "status": "fail"
+    }
+  ],
+  "id": "qq"
+}

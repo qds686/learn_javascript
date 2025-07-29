@@ -1,0 +1,107 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2020-10-22T13:43:44.103Z",
+    "end": "2020-10-22T13:43:44.161Z",
+    "duration": 58,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "931c9d5b-b355-4040-b791-44b468cafa61",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "73899376-d382-4a0b-91e0-cf7f86bc7da9",
+          "title": "Node服务自动化测试脚本",
+          "fullFile": "/Users/yuanzhijia/Desktop/yd-tests/tests/service/router.spec.js",
+          "file": "/tests/service/router.spec.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "404测试",
+              "fullTitle": "Node服务自动化测试脚本 404测试",
+              "timedOut": false,
+              "duration": 36,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "axios\n  .get('http://localhost:8080/xx')\n  .then(function (response) {\n    console.log(response);\n  })\n  .catch(function (error) {\n    done(error);\n  });",
+              "err": {
+                "message": "Error: Request failed with status code 404",
+                "estack": "Error: Request failed with status code 404\n    at createError (node_modules/axios/lib/core/createError.js:16:15)\n    at settle (node_modules/axios/lib/core/settle.js:17:12)\n    at IncomingMessage.handleStreamEnd (node_modules/axios/lib/adapters/http.js:244:11)\n    at endReadableNT (_stream_readable.js:1220:12)\n    at processTicksAndRejections (internal/process/task_queues.js:84:21)",
+                "diff": null
+              },
+              "uuid": "c9564adb-bde8-4523-bc4b-df2b742c760b",
+              "parentUUID": "73899376-d382-4a0b-91e0-cf7f86bc7da9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "c9564adb-bde8-4523-bc4b-df2b742c760b"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 36,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "8.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": true,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "./docs/mochawesome-report",
+        "quiet": true
+      },
+      "version": "5.1.0"
+    }
+  }
+}

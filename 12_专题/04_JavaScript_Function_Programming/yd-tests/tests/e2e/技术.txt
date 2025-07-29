@@ -1,0 +1,7 @@
+1.nightwatch
+https://nightwatchjs.org/
+2.WebdriverIO
+https://webdriver.io/
+3.Cypress chrome 有进度有回放
+4.Rize 无头 没页面
+5.f2etest

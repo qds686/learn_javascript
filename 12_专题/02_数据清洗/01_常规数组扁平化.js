@@ -46,3 +46,18 @@ Object.defineProperty(Array.prototype, "myFlat", {
 });
 var flatArr = arr.myFlat();
 console.log(flatArr); // [1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 9, 11, 13, 14, 10]
+
+Array.prototype.flatten = function () {
+  var _arr = this,
+    toStr = {}.toString;
+
+  if (toStr.call(_arr) !== '[object Array]') {
+    throw new TypeError('Array.prototype.flatten - this is not an Array');
+  }
+
+  return _arr.reduce(function (prev, elem) {
+    return prev.concat(
+      toStr.call(elem) === '[object Array]' ? elem.flatten() : elem
+    );
+  }, []);
+}
