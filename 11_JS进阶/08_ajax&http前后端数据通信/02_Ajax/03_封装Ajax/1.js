@@ -16,7 +16,7 @@ var $ = (function () {
       url = opt.url,
       data = opt.data || null,
       timeout = opt.timeout || 30000,
-      err = opt.err || function () { },
+      error = opt.error || function () { },
       success = opt.success || function () { },
       // 无论成功、失败、超时、中断都会执行complete函数
       complete = opt.complete || function () { },
@@ -75,6 +75,7 @@ var $ = (function () {
 
   return {
     ajax: function (opt) {
+      // 把参数拿到外边处理
       _doAjax(opt);
     },
     post: function (url, data, dataType, successCB, errorCB, completeCB) {
