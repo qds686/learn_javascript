@@ -31,7 +31,8 @@ var $ = (function () {
 
     o.onreadystatechange = function () {
       if (o.readyState === 4) {
-        if (o.status >= 200 && o.status < 300) {
+        // 响应状态
+        if ((o.status >= 200 && o.status < 300) || o.status === 304) {
           switch (dataType.toUpperCase()) {
             case 'JSON':
               success(JSON.parse(o.responseText));
@@ -51,17 +52,21 @@ var $ = (function () {
         complete();
         clearTimeout(t);
         t = null;
+        o = null;
       }
     }
 
     o.send(type === 'GET' ? null : formateDatas(data));
 
+    // 超时设置
     t = setTimeout(function () {
-      o.abort();
-      clearTimeout(t);
-      t = null;
-      o = null;
-      throw new Error('This request has been timeout for ' + url);
+      if (o) {
+        o.abort();
+        clearTimeout(t);
+        t = null;
+        o = null;
+        throw new Error('This request has been timeout for ' + url);
+      }
     }, timeout);
   }
 
@@ -89,7 +94,7 @@ var $ = (function () {
         complete: completeCB
       });
     },
-    get: function (url, dataType, successCB, errorCB) {
+    get: function (url, dataType, successCB, errorCB, completeCB) {
       _doAjax({
         type: 'GET',
         url: url,
@@ -102,25 +107,34 @@ var $ = (function () {
   };
 })();
 
-// $.ajax({
-//   type: 'POST',
-//   url: 'http://127.0.0.1:9999/user/login',
-//   data: {
-//     account: '18310612838',
-//     password: md5("1234567890")
-//   },
-//   success: function (data){
-//     console.log(data);
-//   }
-// });
 
-// $.get("http://127.0.0.1:9999/user/login", function (data){
-//     console.log(data);
-// });
+// 使用封装的Ajax,打开本地wampserve
+var datas = null;
+$.ajax({
+  type: 'POST',
+  url: 'http://localhost:8058/network/02_ajax-request/server.php',
+  data: {
+    status: 1,
+    flag: 2
+  },
+  async: false,
+  success: function (data) {
+    console.log(1);
+    datas = data;
+  }
+});
 
-// $.post("http://127.0.0.1:9999/user/login", {
-//   account: '18310612838',
-//   password: md5("1234567890")
-// }, function (data) {
-//   console.log(data);
-// })
+console.log(2);
+console.log(datas);
+// =>2 null 1
+
+$.post('http://localhost:8058/network/02_ajax-request/server.php', {
+  status: 1,
+  flag: 2
+}, 'json', function (data) {
+  console.log(data);
+});
+
+$.get('http://localhost:8058/network/02_ajax-request/server.php?state=1&flag=2', 'json', function (data) {
+  console.log(data);
+});

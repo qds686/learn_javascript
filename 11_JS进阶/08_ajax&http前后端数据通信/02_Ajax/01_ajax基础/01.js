@@ -79,8 +79,5 @@ xhr.onreadystatechange = function () {
   }
 };
 
-xhr.send(Qs.stringify({
-  lx: 0,
-  name: 'xxx'
-}));
+xhr.send('name=hezi&age=18');
 
