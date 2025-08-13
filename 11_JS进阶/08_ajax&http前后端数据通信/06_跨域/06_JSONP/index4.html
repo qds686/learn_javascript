@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="js/jquery.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    /* $.ajax({
+      url: 'http://localhost:8058/network/04_cross-origin/06_jsonp/jsonp.php',
+      type: 'get',
+      dataType: 'JSONP',
+      jsonp: 'cb',
+      // jsonCallback: 'test'
+      success: function(data){
+        console.log(data);
+      }
+    }) */
+
+    const jsonp = function jsonp(url, options) {
+      // 格式校验 && 合并默认配置项
+      if (typeof url !== 'string') throw new TypeError('url is not a string');
+
+      if (!isPlainObject(options)) options = {};
+      let { params, jsonpName } = Object.assign({
+        params: null,
+        jsonpName: 'callback'
+      }, options);
+
+      // 返回一个promise实例
+      return new Promise((resolve, reject) => {
+        // 移除创建的全局函数&script标签
+        const clear = () => {
+          delete window[name];
+          document.body.removeChild(script);
+        }
+
+        // 创建全局函数「不能导致全局变量污染」
+        const name = `jsonp${+new Date()}`;
+
+        // 发送请求
+
+        // 浏览器接收到响应后，会自动执行这个 JavaScript 代码片段「创建的全局函数」，从而调用 window[name] 函数，并将服务器获取的结果 data 作为参数传递给它
+        window[name] = function (data) {
+          resolve(data);
+          clear();
+        };
+
+        // 处理URL参数：把params拼接上 & 把全局函数名也拼接上
+        if (isPlainObject(params)) {
+          // 把对象变为urlencoded格式字符串
+          params = stringify(params);
+          url += `${url.includes("?") ? "&" : "?"}${params}`;
+        }
+        url += `${url.includes("?") ? "&" : "?"}${jsonpName}=${name}`;
+
+        // 动态创建script标签，向服务器发送请求
+        const script = document.createElement("script");
+        script.src = url;
+        script.onerror = () => {
+          // 请求失败
+          reject();
+          clear();
+        };
+        document.body.appendChild(script);
+      });
+    };
+
+    // 使用jsonp函数发送请求
+    jsonp('http://localhost:8058/network/04_cross-origin/06_jsonp/jsonp.php',{
+      jsonpName: 'cb'
+    })
+      .then(value => {
+        console.log('请求成功:', value);
+      });
+  </script>
+</body>
+
+</html>

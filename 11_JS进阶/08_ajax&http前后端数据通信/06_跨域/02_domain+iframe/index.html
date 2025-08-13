@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    
+    document.domain = 'xx.com';
+
+    var iframe = document.createElement('iframe');
+    iframe.src = 'http://test/xx.com/index.html';
+    iframe.id = 'myIframe';
+    iframe.style.display = 'none';
+    iframe.onload = function () {
+      var $$ = document.getElementById('myIframe').contentWindow.$;
+      $$.post('localhost:8058/network/03_cross-origin/02_domain+iframe/server.php', {
+        status: 1
+      }, function (data) {
+        console.log(data);
+      });
+      console.log($$);
+    }
+    document.body.appendChild(iframe);
+  </script>
+</body>
+
+</html>

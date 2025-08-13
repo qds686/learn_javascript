@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+  <div class="search-wrap J_searchWrap">
+    <div class="input-wrap">
+      <input type="text" class="search-input J_searchInput" />
+      <button class="submit-btn">
+        <a class="lk-btn J_lkBtn" target="_blank">百度一下</a>
+      </button>
+    </div>
+    <div class="list-wrap">
+      <ul class="wd-list J_wdList"></ul>
+      <div class="wd-divider"></div>
+    </div>
+  </div>
+  <script type="text/tpl" id="J_listTpl">
+    <li class="wd-item">
+      <a href="https://www.baidu.com/s?wd={{wd}}" target="_blank" class="wd-lk">{{suggest}}</a>
+    </li>
+  </script>
+  <script src="js/utils.js"></script>
+  <script src="js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <script src="server/server.php"></script> -->
+  <script>
+    // 1 测试 可以给函数传参
+    function test1(str) {
+      console.log(str);
+    }
+    function test2(str) {
+      console.log(str);
+    }
+    function test3(str) {
+      console.log(str);
+    }
+    // 2 给函数 传递数据参数
+    function test(data) {
+      var data = JSON.parse(data);
+      console.log(data); // 返回data JSON数据
+    }
+  </script>
+  <script src="http://localhost:8058/network/04_cross-origin/06_jsonp/js/jsonp.js?cb=test" id="jsonpScript"></script>
+  <script>
+    // 后端定义的脚本，通过script加载，在后面也可以访问
+    // 在script上面定义函数，让后端程序执行函数
+    // 也可以在src加入参数，在后端自动判断执行哪个函数
+    // console.log(a); // 1
+  </script>
+
+</body>
+
+</html>

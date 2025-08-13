@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+    1.script标签是用来解析脚本的，会把src里引入的文件默认当成脚本执行
+    2.不用考虑后缀名是什么，只要符合脚本规范，也可以不用写后缀名
+    3.JS会按顺序阻塞的执行script标签
+      + 引用脚本中定义方法或者属性，在脚本下面可以访问到引用脚本中的方法和属性
+      + 同样，在index.html页面先定义方法，在后面引入的脚本中也可以获取到对应的方法
+    4.引入后端页面也可以获取结果
+  -->
+  
+  <script>
+    function test2(str){
+      console.log(str);
+    }
+  </script>
+  <script src="js/index"></script>
+  <script>
+    // test1(); // 'hezi'
+  </script>
+
+</body>
+
+</html>

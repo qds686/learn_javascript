@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // var iframe = document.createElement('iframe');
+    // iframe.src = 'http://localhost:8058/network/04_cross-origin/03_name+iframe/index.html';
+    // iframe.onload = function () {
+    //   console.log(iframe.contentWindow.name);
+    // }
+    // document.body.appendChild(iframe);
+
+    var flag = false;
+
+    var iframe = document.createElement('iframe');
+    var getDatas = function () {
+      if (flag) {
+        var data = iframe.contentWindow.name;
+        console.log(JSON.parse(data));
+      } else {
+        flag = true;
+        // Ajax请求需要时间，先延迟跳转等上面拿到数据
+        setTimeout(function () {
+          iframe.contentWindow.location = 'index2.html';
+        }, 500);
+      }
+    }
+
+    iframe.src = 'http://localhost:8058/network/04_cross-origin/03_name+iframe/index.html';
+
+    if (iframe.attachEvent) {
+      iframe.attachEvent('onload', getDatas);
+    } else {
+      iframe.onload = getDatas;
+    }
+    document.body.appendChild(iframe);
+  </script>
+</body>
+
+</html>
