@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  main
+  <iframe src="iframe.html" width="500" height="500"></iframe>
+  <script type="text/javascript">
+    /* 
+    iframe中的window用contentWindow表示
+      + 父页面访问子页面中的属性 [iframe节点].contentWindow.xx
+      + 子页面访问父页面 使用window.parent.xx 【Chrome需要修改页面才可以输出】
+    */
+    var myName = 'main';
+
+    var iframe = document.getElementsByTagName('iframe')[0];
+
+    iframe.onload = function () {
+      // 访问子页面的变量
+      console.log(iframe.contentWindow.myName); // 'iframe'
+    }
+  </script>
+  <!-- <script type="text/javascript">
+    // iframe中window.name值共享
+    // window.name = 'mainName';
+    // location.href = 'sub_iframe.html';
+  </script> -->
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  iframe
+  <iframe src="sub_iframe.html" width="400" height="400"></iframe>
+  <script type="text/javascript">
+    var myName = 'iframe';
+
+    // var iframe = document.getElementsByTagName('iframe')[0];
+
+    // iframe.onload = function () {
+    //   // 访问子页面的变量
+    //   console.log(iframe.contentWindow.myName); // 'sub_iframe'
+    // }
+
+    // 子页面访问父页面，需要修改控制台的页面才可以输出
+    console.log(window.parent.myName); // 'main'
+  </script>
+</body>
+
+</html>
