@@ -1,0 +1,188 @@
+body {
+  margin: 0;
+  background-color: #eee;
+}
+
+input:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  font-weight: normal;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.modal-container {
+  display: none;
+  width: 300px;
+  min-height: 0;
+  margin: 30px auto;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modal-container.show {
+  display: block;
+}
+
+.modal-container:hover {
+  box-shadow: 5px 5px 5px #ccc;
+}
+
+.modal-container .login-box {
+  position: relative;
+}
+
+.modal-container .login-box .hd {
+  height: 44px;
+  text-align: center;
+  line-height: 44px;
+  background-color: #2d5a98;
+  font-size: 12px;
+  color: #fff;
+}
+
+.modal-container .login-box .fa-times {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 10px;
+  height: 10px;
+  margin: auto 0;
+  color: #fff;
+}
+
+.modal-container .login-box .bd {
+  padding: 20px 15px 20px 15px;
+}
+
+.modal-container .login-box .bd .error-tip {
+  height: 30px;
+  color: red;
+}
+
+.modal-container .login-box .bd .user-input {
+  margin-bottom: 5px;
+}
+
+.modal-container .login-box .bd .input-box {
+  position: relative;
+  width: 270px;
+  height: 40px;
+}
+
+.modal-container .login-box .bd .input-box .fa-user,
+.modal-container .login-box .bd .input-box .fa-lock {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: auto 0;
+}
+
+.modal-container .login-box .bd .input-box .text-input {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  padding-left: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.modal-container .login-box .bd .persisted-login {
+  margin: 10px 0;
+  line-height: 40px;
+}
+
+.modal-container .login-box .bd .input-box .login-btn {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  background-color: #2d5a98;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+}
+
+.header {
+  background-color: #2d5a98;
+  color: #fff;
+}
+
+.header.hide {
+  display: none;
+}
+
+.header .user {
+  height: 44px;
+}
+
+.header .user-item {
+  position: relative;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  text-align: right;
+  line-height: 44px;
+  font-size: 14px;
+}
+
+.header .user-item .user-btn {
+  position: absolute;
+  top: 6px;
+  right: 20px;
+  width: 60px;
+  height: 30px;
+  background-color: #008c8c;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.header .user-item .nickname {
+  padding-right: 80px;
+}
+
+.header .user-item .nickname i {
+  position: relative;
+  top: 1px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
