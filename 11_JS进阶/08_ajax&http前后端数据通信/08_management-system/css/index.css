@@ -1,0 +1,156 @@
+.list-wrap {
+  width: 1000px;
+  margin: 100px auto;
+}
+
+.list-tb {
+  width: 100%;
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+.list-tb .tb-tt {
+  height: 60px;
+  line-height: 60px;
+}
+
+.list-tb tr {
+  height: 44px;
+}
+
+.list-tb td,
+.list-tb th {
+  position: relative;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+.list-tb .nav-item {
+  float: left;
+  width: 130px;
+  height: 30px;
+  margin: 0 15px;
+  background-color: #ddd;
+  text-align: center;
+  line-height: 30px;
+}
+
+.list-tb .nav-item .nav-lk {
+  display: block;
+  height: 100%;
+  color: #999;
+}
+
+.list-tb .nav-item.active {
+  background-color: #424242;
+}
+
+.list-tb .nav-item.active .nav-lk {
+  color: #fff;
+}
+
+.list-tb .search-row {
+  display: none;
+}
+
+.list-tb .search-row.show {
+  display: table-row;
+}
+
+.list-tb .search-wrap {
+  position: relative;
+  width: 300px;
+  height: 30px;
+}
+
+.list-tb .search-wrap .fa-solid{
+  position: absolute;
+  left: 25px;
+  top: 7px;
+}
+
+.list-tb .search-wrap .search-input {
+  width: 100%;
+  height: 100%;
+  margin-left: 15px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  text-indent: 30px;
+}
+
+.list-tb .field-tt{
+  background-color: #eee;
+}
+
+.list-tb .tip-row.hide {
+  display: none;
+}
+
+.list-tb .course-name-cell {
+  position: relative;
+  text-align: left;
+  width: 340px;
+}
+
+.list-tb .course-name-cell .course-name-input{
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 400;
+  border: 1px solid #424242;
+}
+
+.list-tb .course-name-cell .course-name-input.show{
+  display: block;
+}
+
+.list-tb .list-btn{
+  height: 30px;
+  padding: 0 15px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.list-tb .list-btn.delete {
+  background-color: rgb(201, 35, 35);
+}
+
+.list-tb .list-btn.regain {
+  background-color: orange;
+}
+
+.list-tb .page-btn-row {
+  display: none;
+  line-height: 44px;
+}
+
+.list-tb .page-btn-row.show{
+  display: table-row;
+}
+
+.list-tb .page-btn-row .btn-item{
+  float: left;
+  width: 25px;
+  height: 25px;
+  margin: 0 15px;
+  text-align: center;
+  line-height: 25px;
+  background-color: #eee;
+}
+
+.list-tb .page-btn-row .btn-item.cur {
+  background-color: #424242;
+}
+
+.list-tb .page-btn-row .btn-item .page-btn{
+  color: #424242;
+}
+
+.list-tb .page-btn-row .btn-item.cur .page-btn{
+  color: #fff;
+}
