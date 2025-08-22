@@ -1,0 +1,20 @@
+.wrap{
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.wf-item {
+  position: absolute;
+  background: url(../img/default.png) no-repeat;
+  background-position: center;
+  background-color: #eee;
+  overflow: hidden;
+}
+
+.wf-item img {
+  display: block;
+  width: 100%;
+  opacity: 0;
+  transition: opacity .3s;
+}

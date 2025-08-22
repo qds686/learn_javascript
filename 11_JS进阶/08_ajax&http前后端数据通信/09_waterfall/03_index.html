@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <div class="wrap js_wrap"></div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/04_对插件补充图片懒加载.js"></script>
+  <script type="text/javascript">
+    new Waterfall('js_wrap', {
+      imgApi: 'server/index.php',
+      column: 5,
+      gap: 10
+    }).init();
+  </script>
+</body>
+
+</html>

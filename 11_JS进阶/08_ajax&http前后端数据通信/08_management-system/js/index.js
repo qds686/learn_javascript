@@ -178,6 +178,9 @@
           pageCount = data.pages;
 
         // 点击课程搜索，搜索到的应该是manage列表，没有分页
+        // 搜索到的是manage列表的所有项，我们要对数据进行处理，搜索到对应keyword才显示
+
+        res = dataFilter(res, keyWord);
         _setDatas('manage', res);
       },
       error: function () {
@@ -205,6 +208,18 @@
       // 没有数据
       showWarningTip(true);
     }
+  }
+
+  function dataFilter(data, keyWord) {
+    return data.reduce(function (prev, elem) {
+      var res = elem.course.indexOf(keyWord);
+
+      if (res !== -1) {
+        prev.push(elem);
+      }
+
+      return prev;
+    }, []);
   }
 
   // 分页器列表渲染
@@ -242,7 +257,7 @@
 
     if (className === 'page-btn') {
       var oParent = tar.parentNode,
-        // 每一次点击长度肯不同，删除，增加等
+        // 每一次点击长度可能不同，删除，增加等
         oBtnItemsLen = oBtnItems.length,
         // 当前li的索引
         pageNum = [].indexOf.call(oBtnItems, oParent),
