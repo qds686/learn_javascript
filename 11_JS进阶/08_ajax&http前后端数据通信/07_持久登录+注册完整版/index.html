@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PERSISTENT LOGIN</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/7.0.0/css/all.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+  <div class="modal-container js_modal">
+    <div class="mod-box login-box">
+      <a href="javascript:;" class="fa fa-times js_closeBtn"></a>
+      <div class="hd">
+        <h1>用户登录</h1>
+      </div>
+      <div class="bd">
+        <div class="error-tip js_errorTip"></div>
+
+        <form action="http://localhost:8058/api_for_study/index.php/Home/User/login" method="post" id="js_loginForm"
+          class="submit-form">
+          <div class="input-box user-input">
+            <label for="js_username" class="fa fa-user"></label>
+            <input type="text" id="js_username" class="text-input" placeholder="用户名|手机号" maxlength="20" />
+          </div>
+          <div class="input-box">
+            <label for="js_password" class="fa fa-lock"></label>
+            <input type="password" id="js_password" class="text-input" placeholder="密码" maxlength="20" />
+          </div>
+          <div class="input-box persisted-login">
+            <input type="checkbox" id="js_persistedLogin" />
+            <label for="js_persistedLogin">保持登录30天</label>
+          </div>
+          <div class="input-box">
+            <button type="submit" class="login-btn js-loginBtn">登录</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="mod-box reg-box">
+      <a href="javascript:;" class="fa fa-times js_closeBtn"></a>
+      <div class="hd">
+        <h1>用户注册</h1>
+      </div>
+      <div class="bd">
+        <div class="error-tip js_errorTip"></div>
+        <form action="http://localhost:8058/api_for_study/index.php/Home/User/register" method="post" id="js_regForm">
+          <div class="input-box">
+            <label for="js_rnumber" class="fa fa-user"></label>
+            <input type="text" id="js_rnumber" class="text-input" placeholder="手机号 11位" maxlength="11" />
+          </div>
+          <div class="input-box">
+            <label for="js_rpassword" class="fa fa-lock"></label>
+            <input type="password" id="js_rpassword" class="text-input" placeholder="密码 6-20位" maxlength="20" />
+          </div>
+          <div class="input-box tel-code">
+            <label for="js_rtelcode" class="fa fa-mobile-phone"></label>
+            <input type="text" id="js_rtelcode" class="text-input" placeholder="手机验证码 6位" maxlength="6" />
+            <button class="input-btn js_sendCodeBtn"
+              value="http://localhost:8058/api_for_study/index.php/Home/User/sendTelCode">发送验证码</button>
+          </div>
+          <div class="input-box pass-code">
+            <label for="js_rpasscode" class="fa fa-unlock"></label>
+            <input type="text" id="js_rpasscode" class="text-input" placeholder="验证码 4位" maxlength="4" />
+            <img src="http://localhost:8058/api_for_study/index.php/Home/User/verify" class="code-img js_codeImg"
+              alt="刷新验证码" title="刷新验证码" />
+          </div>
+          <div class="input-box submit-box">
+            <button type="submit" class="login-btn js_regBtn">注册</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <header class="header js_loginHeader">
+    <div class="user">
+      <div class="user-item js_loginStatus">
+        <a href="javascript:;" class="login-btn login js_openBtn">登录</a>
+        <a href="javascript:;" class="reg-btn login js_openRegBtn">注册</a>
+      </div>
+    </div>
+  </header>
+
+  <script type="text/html" id="js_loginTpl">
+    <a href="javascript:;" class="login-btn login js_openBtn">登录</a>
+    <a href="javascript:;" class="reg-btn login js_openRegBtn">注册</a>
+  </script>
+  <script type="text/html" id="js_userTpl">
+    <span class="nickname">
+      <i class="fa-solid fa-circle-user"></i>欢迎您，{{nickname}}
+    </span>
+    <a href="http://localhost:8058/api_for_study/index.php/Home/User/logout" class="reg-btn login js_logout">退出</a>
+  </script>
+  <script src="js/utils.js"></script>
+  <script src="js/register.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/index.js"></script>
+</body>
+
+</html>

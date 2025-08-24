@@ -1,0 +1,253 @@
+body {
+  margin: 0;
+  background-color: #eee;
+}
+
+input:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  font-weight: normal;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.modal-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  min-height: 0;
+  margin-left: -150px;
+  transform: translateY(-50%);
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modal-container:hover {
+  box-shadow: 5px 5px 5px #ccc;
+}
+
+.modal-container .login-box {
+  display: none;
+  position: relative;
+}
+
+.modal-container .login-box.show {
+  display: block;
+}
+
+.modal-container .mod-box .hd {
+  height: 44px;
+  text-align: center;
+  line-height: 44px;
+  background-color: #2d5a98;
+  font-size: 12px;
+  color: #fff;
+}
+
+.modal-container .mod-box .fa-times {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  margin: auto 0;
+  color: #fff;
+}
+
+.modal-container .mod-box .bd {
+  padding: 0 15px 20px 15px;
+}
+
+.modal-container .mod-box .bd .error-tip {
+  height: 30px;
+  color: red;
+  line-height: 30px;
+}
+
+.modal-container .mod-box .bd .user-input {
+  margin-bottom: 5px;
+}
+
+.modal-container .mod-box .bd .input-box {
+  position: relative;
+  width: 270px;
+  height: 40px;
+}
+
+.modal-container .mod-box .bd .input-box .fa-user,
+.modal-container .mod-box .bd .input-box .fa-lock,
+.modal-container .reg-box .bd .input-box .fa-mobile-phone,
+.modal-container .reg-box .bd .input-box .fa-unlock {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: auto 0;
+}
+
+.modal-container .mod-box .bd .input-box .text-input {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  padding-left: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.modal-container .mod-box .bd .persisted-login {
+  margin: 10px 0;
+  line-height: 40px;
+}
+
+.modal-container .mod-box .bd .input-box .login-btn {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  background-color: #2d5a98;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+}
+
+.modal-container .reg-box {
+  display: none;
+  position: relative;
+}
+
+.modal-container .reg-box.show {
+  display: block;
+}
+
+.modal-container .reg-box .fa-times {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 10px;
+  height: 10px;
+  margin: auto 0;
+  color: #fff;
+}
+
+.modal-container .reg-box .bd .input-box {
+  margin-bottom: 8px;
+}
+
+.modal-container .reg-box .bd .input-box .input-btn,
+.modal-container .reg-box .bd .input-box .code-img {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  bottom: 0;
+  width: 96px;
+  height: 91%;
+  margin: auto 0;
+  background-color: #ccc;
+  line-height: 91%;
+  border: none;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.modal-container .reg-box .bd .input-box .input-btn.disabled {
+  background-color: #ededed;
+  color: #999;
+}
+
+.modal-container .reg-box .bd .input-box.tel-code .text-input,
+.modal-container .reg-box .bd .input-box.pass-code .text-input {
+  padding-right: 96px;
+}
+
+.modal-container .reg-box .bd .input-box.submit-box {
+  margin: 15px 0 0 0;
+}
+
+.header {
+  background-color: #2d5a98;
+  color: #fff;
+}
+
+.header.hide {
+  display: none;
+}
+
+.header .user {
+  height: 44px;
+}
+
+.header .user-item {
+  position: relative;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  text-align: right;
+  line-height: 44px;
+  font-size: 14px;
+}
+
+.header .user-item .login {
+  position: absolute;
+  top: 6px;
+  width: 60px;
+  height: 30px;
+  background-color: #008c8c;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.header .user-item .login-btn {
+  right: 90px;
+}
+
+.header .user-item .reg-btn {
+  right: 20px;
+}
+
+.header .user-item .nickname {
+  padding-right: 100px;
+}
+
+.header .user-item .nickname i {
+  position: relative;
+  top: 1px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
