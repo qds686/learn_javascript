@@ -1,0 +1,28 @@
+.item {
+  width: 50%;
+  height: 2.45rem;
+  padding: 0.1rem 0.05rem 0;
+  box-sizing: border-box;
+
+  .item-lk {
+    display: block;
+    height: 100%;
+    padding: .05rem .05rem 0;
+    background-color: #fff;
+    box-sizing: border-box;
+
+    .title {
+      height: .3rem;
+      line-height: .15rem;
+      overflow: hidden;
+      font-weight: bold;
+    }
+
+    .price{
+      height: 0.25rem;
+      line-height: .3rem;
+      font-size: .14rem;
+      color: #f40;
+    }
+  }
+}

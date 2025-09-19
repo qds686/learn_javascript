@@ -8,9 +8,9 @@
 </head>
 
 <body>
-  <script src="./A.js"></script>
+  <!-- <script src="./A.js"></script>
   <script src="./B.js"></script>
-  <script src="./main.js"></script>
+  <script src="./main.js"></script> -->
 </body>
   <!-- IMPORT JS -->
    <script src="./lib/require.js"></script>
@@ -20,4 +20,5 @@
 <!-- 
   AMD设计思想：在单例设计模式基础上，有效的解决了模块之间的依赖问题，告别之前“手动一点点分析依赖，按照顺序依次导入”的问题了，而且可以结合gulp/webpack等，最后把各个模块代码合并压缩打包在一起...
     + 但是依赖的模块需要前置导入
+    + 前置模块异步加载完毕，才会执行后面的匿名函数，所以不存在顺序问题
 -->

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.create() 与 Object.getOwnPropertyDescriptors() 解析</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        header {
+            background: #4a00e0;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+        .card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #4a00e0;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a00e0;
+        }
+        h3 {
+            margin: 15px 0 10px;
+            color: #333;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+        .explanation {
+            line-height: 1.6;
+        }
+        .explanation p {
+            margin-bottom: 15px;
+        }
+        .demo {
+            background: #eef4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .output {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-family: 'Fira Code', monospace;
+            overflow-x: auto;
+            min-height: 100px;
+        }
+        .btn {
+            background: #4a00e0;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #3575fc;
+        }
+        .highlight {
+            color: #ff9d00;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: white;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Object.create() 与 Object.getOwnPropertyDescriptors()</h1>
+            <p class="subtitle">深入理解JavaScript对象创建与属性描述符</p>
+        </header>
+        
+        <div class="content">
+            <div class="card">
+                <h2>Object.getOwnPropertyDescriptors()</h2>
+                <div class="explanation">
+                    <p>该方法返回指定对象所有自身属性的描述符（包括可枚举和不可枚举属性）。</p>
+                    <p>属性描述符包含以下信息：</p>
+                    <ul>
+                        <li><span class="highlight">value</span>: 属性的值</li>
+                        <li><span class="highlight">writable</span>: 是否可写</li>
+                        <li><span class="highlight">enumerable</span>: 是否可枚举</li>
+                        <li><span class="highlight">configurable</span>: 是否可配置</li>
+                        <li><span class="highlight">get</span>: getter函数（如果存在）</li>
+                        <li><span class="highlight">set</span>: setter函数（如果存在）</li>
+                    </ul>
+                </div>
+                
+                <h3>示例代码：</h3>
+                <pre><code>var obj = { a: 1, b: 2, c: 3 };
+console.log(Object.getOwnPropertyDescriptors(obj));</code></pre>
+                
+                <div class="demo">
+                    <h3>输出结果：</h3>
+                    <div class="output" id="descriptors-output"></div>
+                    <button class="btn" onclick="showDescriptors()">运行示例</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Object.create()</h2>
+                <div class="explanation">
+                    <p>该方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__。</p>
+                    <p>语法：<code>Object.create(proto, [propertiesObject])</code></p>
+                    <p>参数：</p>
+                    <ul>
+                        <li><span class="highlight">proto</span>: 新创建对象的原型对象</li>
+                        <li><span class="highlight">propertiesObject</span>: 可选。属性描述符对象</li>
+                    </ul>
+                    <p>在示例中，我们使用<code>Object.getOwnPropertyDescriptors()</code>获取原对象的所有属性描述符，然后使用<code>Object.create()</code>创建一个具有相同原型和属性的新对象。</p>
+                </div>
+                
+                <h3>示例代码：</h3>
+                <pre><code>// 使用Object.create()和Object.getOwnPropertyDescriptors()
+// 创建一个完全相同的克隆对象
+const clone = Object.create(
+    Object.getPrototypeOf(obj),
+    Object.getOwnPropertyDescriptors(obj)
+);
+console.log(clone);</code></pre>
+                
+                <div class="demo">
+                    <h3>输出结果：</h3>
+                    <div class="output" id="clone-output"></div>
+                    <button class="btn" onclick="showClone()">运行示例</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>代码含义解析</h2>
+            <div class="explanation">
+                <p>这段代码的含义是：</p>
+                <ol>
+                    <li>首先创建一个对象 <code>obj</code>，它有三个属性：a、b 和 c</li>
+                    <li>使用 <code>Object.getOwnPropertyDescriptors(obj)</code> 获取 obj 所有自身属性的描述符</li>
+                    <li>使用 <code>Object.create()</code> 方法创建一个新对象：
+                        <ul>
+                            <li>第一个参数 <code>Object.getPrototypeOf(obj)</code> 获取 obj 的原型，确保克隆对象有相同的原型链</li>
+                            <li>第二个参数 <code>Object.getOwnPropertyDescriptors(obj)</code> 将原对象的所有属性（包括它们的特性如 enumerable、writable、configurable）复制到新对象</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>这种方法创建的克隆对象会保留原对象的所有属性特性，是一种"浅拷贝"的高级形式。</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>JavaScript 对象属性描述符与克隆技术解析</p>
+    </footer>
+
+    <script>
+        // 原始对象
+        var obj = { a: 1, b: 2, c: 3 };
+        
+        // 显示属性描述符
+        function showDescriptors() {
+            const descriptors = Object.getOwnPropertyDescriptors(obj);
+            const output = document.getElementById('descriptors-output');
+            output.innerHTML = JSON.stringify(descriptors, null, 2);
+        }
+        
+        // 显示克隆对象
+        function showClone() {
+            const clone = Object.create(
+                Object.getPrototypeOf(obj),
+                Object.getOwnPropertyDescriptors(obj)
+            );
+            
+            const output = document.getElementById('clone-output');
+            output.innerHTML = `克隆对象: ${JSON.stringify(clone)}\n\n`;
+            output.innerHTML += `克隆对象属性a的值: ${clone.a}\n`;
+            output.innerHTML += `克隆对象属性b的值: ${clone.b}\n`;
+            output.innerHTML += `克隆对象属性c的值: ${clone.c}\n\n`;
+            output.innerHTML += `原对象与克隆对象是否相同: ${obj === clone ? '是' : '否'}\n`;
+            output.innerHTML += `原对象与克隆对象是否有相同的属性: ${obj.a === clone.a && obj.b === clone.b && obj.c === clone.c ? '是' : '否'}`;
+        }
+        
+        // 初始加载时显示一些信息
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('descriptors-output').innerHTML = '点击"运行示例"查看属性描述符';
+            document.getElementById('clone-output').innerHTML = '点击"运行示例"查看克隆结果';
+        });
+    </script>
+</body>
+</html>

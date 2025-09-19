@@ -1,0 +1,9 @@
+{
+  "sourceType": "module",
+  "presets": [
+    ["@babel/preset-env", {
+      "modules": "commonjs", // 强制将ES6模块转为CommonJS
+      "targets": "> 0.25%, not dead"
+    }]
+  ]
+}

@@ -1,0 +1,1 @@
+<div class="title-box">{{goods_name}}</div>
